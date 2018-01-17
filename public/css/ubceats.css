@@ -1,0 +1,14 @@
+
+body {
+	
+ 	min-height: 75rem;
+	font-family: "PT Sans", sans-serif;
+}
+
+.navbar-brand {
+	font-weight: bold;
+}
+
+.text-muted {
+	margin-top: 10px;
+}

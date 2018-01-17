@@ -1,0 +1,21 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+    <form id="searchForm">
+        <div class="form-group">
+            <input type="text" class="form-control form-control-lg" id="search-term" aria-describedby="search-term"
+                   placeholder="Look up any food item at UBC... ">
+            <small id="search-help" class="form-text text-muted">
+                Try searching for
+                <mark><a href="/search/pizza">pizza</a></mark>
+                or
+                <mark><a href="/search/burger">burger</a></mark>
+                .
+            </small>
+
+        </div>
+    </form>
+
+</main>
+
+<?php include "footer.phtml"; ?>

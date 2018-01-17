@@ -1,0 +1,191 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+    <form id="refineSearchForm">
+        <div class="form-group">
+            <input type="text" class="form-control form-control-lg" id="filter-page-search"
+                   aria-describedby="search-term"
+                   placeholder="Look up any food item at UBC... " <?php if (isset($thing)) echo "value=\"$thing\""; ?> />
+            <small id="search-help" class="form-text text-muted">
+                Try searching for
+                <mark><a href="/search/pizza">pizza</a></mark>
+                or
+                <mark><a href="/search/burger">burger</a></mark>
+                .
+            </small>
+            <p class="text-right"><a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseFilters"
+                                     role="button" aria-expanded="false" aria-controls="collapseFilters">
+                    Filters &amp; more...
+                </a></p>
+        </div>
+        <div class="collapse" id="collapseFilters">
+            <div class="card card-body">
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value=""
+                               id="veggieCheck" <?php if (in_array('vegetarian', $filters)) echo "checked"; ?> >
+                        <label class="form-check-label" for="veggieCheck">
+                            Only vegetarian items
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value=""
+                               id="veganCheck" <?php if (in_array('vegan', $filters)) echo "checked"; ?>>
+                        <label class="form-check-label" for="veganCheck">
+                            Only vegan items
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value=""
+                               id="gfCheck" <?php if (in_array('gluten_free', $filters)) echo "checked"; ?>>
+                        <label class="form-check-label" for="gfCheck">
+                            Only gluten free items
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value=""
+                               id="mealPlanCheck" <?php if (in_array('mealPlan', $filters)) echo "checked"; ?>>
+                        <label class="form-check-label" for="mealPlanCheck">
+                            Only restaurants which support meal plan
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value=""
+                               id="flexDollarsCheck" <?php if (in_array('flexDollars', $filters)) echo "checked"; ?>>
+                        <label class="form-check-label" for="flexDollarsCheck">
+                            Only restaurants which support flex dollars
+                        </label>
+                    </div>
+
+                    <br>
+                    <div class="form-check form-check-inline">
+
+                        <label class="form-check-label" for="sortOptions">
+                            Sort by
+                        </label>
+
+                        <select name="sortOptions" id="sortOptions">
+                            <option value="0" <?php if ($sort == 0) echo "selected"; ?>>Rating</option>
+                            <option value="1" <?php if ($sort == 1) echo "selected"; ?>>Distance</option>
+                            <option value="2" <?php if ($sort == 2) echo "selected"; ?>>Price</option>
+                        </select>
+
+                    </div>
+
+                    <br><br>
+
+                    <div>
+                        <button class="btn btn-primary btn-sm">Refine search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <?php if (isset($venues)) : ?>
+    <div id="accordion" role="tablist">
+        <?php $shown = true; ?>
+        <?php foreach ($venues
+
+                       as $venue): ?>
+
+        <div class="card" style="margin-top: 10px;">
+            <div class="card-header" role="tab" id="heading<?php echo $venue['venue_id']; ?>">
+                <h5 class="mb-0">
+                    <a data-toggle="collapse" style="text-decoration:none"
+                       href="#collapse<?php echo $venue['venue_id']; ?>" role="button" aria-expanded="true"
+                       aria-controls="collapse<?php echo $venue['venue_id']; ?>">
+                        <div class="float-right">
+                            <?php
+                            if ($venue['opensAt'] == -1 || $venue['closesAt'] == -1) {
+                                echo '<small style="color: red;">closed today</small>';
+                            } else if ($venue['isOpen']) {
+                                echo "<small style=\"color: limegreen;\">" . date("g:i a", strtotime($venue['opensAt'])) . "  – " . date("g:i a", strtotime($venue['closesAt'])) . "</small>";
+                            } else {
+                                echo "<small style=\"color: red;\">" . date("g:i a", strtotime($venue['opensAt'])) . "  – " . date("g:i a", strtotime($venue['closesAt'])) . "</small>";
+                            }
+                            ?>
+                        </div>
+                        <div><?php echo $venue['name']; ?>
+                            <small>(<?php echo count($venue['food_items']); ?>)</small>
+                        </div>
+                        <small><?php echo($venue['mealPlan'] ? "<span class=\"badge badge-pill badge-success\"><span class=\"oi oi-circle-check\"></span> Meal Plan</span>" : "<span class=\"badge badge-pill badge-danger\"><span class=\"oi oi-circle-x\"></span> Meal Plan</span>"); ?>
+
+                            <?php echo($venue ['flexDollars'] ? "<span class=\"badge badge-pill badge-success\"><span class=\"oi oi-circle-check\"></span> Flex Dollars</span>" : "<span class=\"badge badge-pill badge-danger\"><span class=\"oi oi-circle-x\"></span> Flex Dollars</span>"); ?></small>
+
+                    </a>
+                </h5>
+            </div>
+
+            <div id="collapse<?php echo $venue['venue_id']; ?>" class="collapse <?php if ($shown) {
+                echo "show";
+                $shown = false;
+            } ?>" role="tabpanel" aria-labelledby="heading<?php echo $venue['venue_id']; ?>"
+                 data-parent="#accordion">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <small> On average, items you are looking for here cost
+                                <mark>$<?php echo(number_format(round($venue['price'], 1), 2)) ?></mark>.</small>
+                            <br>
+
+                            <?php if ($venue['phoneNumber']) { ?>
+                                <small><span class="ion-android-call"></span>
+                                    <a href="tel:<?php echo $venue['phoneNumber'] ?>">
+                                        (<?php echo substr($venue['phoneNumber'], 0, 3); ?>)
+                                        <?php echo substr($venue['phoneNumber'], 3, 3); ?>
+                                        -<?php echo substr($venue['phoneNumber'], 6); ?></a></small><br>
+                            <?php } ?>
+
+                            <small><span class="ion-link"></span> <a
+                                        href="<?php echo $venue['url']; ?>"><?php echo parse_url($venue['url'])['host']; ?></a>
+                            </small>
+
+                        </div>
+                    </div>
+
+                    <?php foreach ($venue ['food_items'] as $food_item): ?>
+
+                        <hr>
+                        <div class="float-right">
+                            <span class="oi oi-arrow-bottom" onclick="voteDown(<?php echo $food_item ['food_item_id']; ?>)"></span> <span id="rating<?php echo $food_item ['food_item_id']; ?>"><?php echo $food_item ['rating'] ?></span> <span
+                                    class="oi oi-arrow-top" onclick="voteUp(<?php echo $food_item ['food_item_id']; ?>)"></span>
+                        </div>
+                        <h5><?php echo $food_item['item_name'] ?>
+
+                        </h5>
+                        <p>
+                            <span class="badge badge-secondary">$<?php echo $food_item ['price'] ?></span>
+                            <?php if ($food_item ['vegetarian']) { ?>
+                                <span class="badge badge-success">Vegetarian</span>
+                            <?php } ?>
+                            <?php if ($food_item ['vegan']) { ?>
+                                <span class="badge badge-success">Vegan</span>
+                            <?php } ?>
+                            <?php if ($food_item ['gluten_free']) { ?>
+                                <span class="badge badge-success">Gluten free</span>
+                            <?php } ?>
+                        </p>
+                    <?php endforeach; ?>
+
+                </div>
+
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <?php if (!isset ($venue)) : ?>
+            <div class="alert alert-info" role="alert">
+                No results found, please make a different search
+            </div>
+        <?php endif; ?>
+
+
+        <?php else: ?>
+            <p>No venues found.</p>
+        <?php endif; ?>
+
+
+</main>
+
+<?php include "footer.phtml"; ?>
