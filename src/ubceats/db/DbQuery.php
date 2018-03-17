@@ -9,6 +9,11 @@ abstract class DbQuery{
         return DbConnection::getInstance()->getMysqli();
     }
 
+    protected function query($str){
+        DatabaseLogger::sendLog($str);
+        return $this->getDb()->query($str);
+    }
+
     public function __invoke()
     {
        return $this->runQuery();

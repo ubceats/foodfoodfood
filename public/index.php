@@ -9,6 +9,8 @@ if (PHP_SAPI == 'cli-server') {
     }
 }
 
+$GLOBALS['mysqlLogs'] = [];
+
 $GLOBALS['dir'] = dirname(__FILE__) . '/../';
 
 date_default_timezone_set("America/Vancouver");

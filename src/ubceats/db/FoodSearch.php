@@ -147,7 +147,7 @@ class FoodSearch extends DbQuery {
 
         $arr = [];
 
-        $query = $this->getDb()->query($query);
+        $query = $this->query($query);
 
 
         while ($onerow = $query->fetch_assoc()) {
