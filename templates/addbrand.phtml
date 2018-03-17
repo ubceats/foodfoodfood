@@ -4,7 +4,20 @@
 
     <h2>Add a brand</h2>
 
-    <form>
+    <form method="get" action="/addbrand">
+        <?php
+        if ($didInsert) {
+            if (is_null($error)) { ?>
+            <div class="alert alert-success" role="alert">
+                <p>The new brand <code><?php echo $lastName; ?></code> was successfully pushed to the database.</p>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, but the brand insertion failed. MySQL returned the following error:</p>
+                <code><?php echo $error; ?></code>
+            </div>
+            <?php }
+            } ?>
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" name="name">

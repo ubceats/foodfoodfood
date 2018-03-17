@@ -18,7 +18,7 @@
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
 
     <!-- UBC font: PT Sans -->
-    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
 
 </head>
 
@@ -76,7 +76,10 @@
 </nav>
 
 <?php
+echo "<small>";
+echo "<main role=\"main\" class=\"container\"><code><b>".sizeof($GLOBALS["mysqlLogs"])." queries were run to generate this page.</b></code></main>";
 foreach ($GLOBALS["mysqlLogs"] as $item){
     echo "<main role=\"main\" class=\"container\"><code>".$item."</code></main>";
 }
+echo "</small><br/>";
 ?>
