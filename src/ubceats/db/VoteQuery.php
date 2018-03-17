@@ -21,11 +21,7 @@ class VoteQuery extends DbQuery
 
     public function runQuery()
     {
-        if ($this->isPositive) {
-            $this->query("UPDATE food_items SET rating = rating + 1 WHERE id = '" .$this->getDb()->real_escape_string($this->foodItemId) . "'");
-        } else {
-            $this->query("UPDATE food_items SET rating = rating - 1 WHERE id = '" .$this->getDb()->real_escape_string($this->foodItemId) . "'");
-        }
+        // FUCK THIS SHIT!!!
     }
 
 

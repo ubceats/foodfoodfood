@@ -46,8 +46,8 @@ class FoodSearch extends DbQuery {
                     "price" => 0,
                     "url" => $foodItem['url'],
                     "phoneNumber" => $foodItem['phoneNumber'],
-                    "lat" => $foodItem['lat'],
-                    "lon" => $foodItem['lon'],
+                    "lat" => $foodItem['latitude'],
+                    "lon" => $foodItem['longitude'],
                     "name" => $foodItem['venue_name'],
                     "description" => $foodItem['venue_description'],
                     "mealPlan" => $foodItem['mealPlan'],
@@ -112,30 +112,17 @@ class FoodSearch extends DbQuery {
             $date = 7;
         }
 
-        $query = "SELECT food_items.id AS food_item_id,
-	   food_items.item_name,
-	   food_items.price,
-	   food_items.vegetarian,
-	   food_items.vegan,
-	   food_items.gluten_free,
-	   food_items.rating,
-	   venues.id AS venue_id,
-	   venues.name AS venue_name,
-	   venues.venueDesc AS venue_description,
-	   venues.lat,
-	   venues.lon,
-	   venues.mealPlan,
-	   venues.flexDollars,
-	   venues.url,
-	   venues.phoneNumber,
-	   hours.opensAt,
-	   hours.closesAt
-  FROM food_items
-  JOIN venues ON venues.id = food_items.venue_id
-  JOIN hours  ON venues.id = hours.venue_id
-  WHERE (food_items.item_name LIKE '%" . $this->getDb()->real_escape_string($this->search) . "%' OR food_items.keywords LIKE '%" . $this->getDb()->real_escape_string($this->search) . "%' OR venues.name LIKE '%" . $this->getDb()->real_escape_string($this->search) . "%') AND hours.day = " . $this->getDb()->real_escape_string($date) ;
+        $query = "SELECT *
+FROM food_items f, brand b, locations l, opening_times o
+WHERE f.brandName = b.name
+      AND o.brandName = b.name
+      AND l.name = o.locationName
+      AND l.address = o.locationAddress
+      AND o.day =" . $this->getDb()->real_escape_string($date) . "
+      AND (f.name LIKE '%" . $this->getDb()->real_escape_string($this->search) . "%' OR b.name LIKE '%" . $this->getDb()->real_escape_string($this->search) . "%');";
 
-        foreach($this->filters as $filter){
+
+        /*foreach($this->filters as $filter){
             if(in_array($filter, self::$VENUE_FILTERS)){
                 $query .= " AND venues." . $this->getDb()->real_escape_string($filter) . " = 1";
             }
@@ -143,7 +130,7 @@ class FoodSearch extends DbQuery {
                 $query .= " AND food_items." . $this->getDb()->real_escape_string($filter) . " = 1";
             }
 
-        }
+        }*/
 
         $arr = [];
 
@@ -152,6 +139,7 @@ class FoodSearch extends DbQuery {
 
         while ($onerow = $query->fetch_assoc()) {
             array_push($arr, $onerow);
+            DatabaseLogger::sendLog(var_export($onerow, true));
         }
 
 
