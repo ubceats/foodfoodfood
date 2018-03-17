@@ -25,7 +25,7 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" href="/">UBCEats</a>
+    <a class="navbar-brand mb-0 h1" href="/">UBCEats</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -35,6 +35,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="/about">WTF is this?</a>
             </li>
+            <?php if (isset($_SESSION["isAdmin"])) { ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin features
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/addbrand">Add a brand</a>
+                    <a class="dropdown-item" href="/addvenue">Add a venue</a>
+                    <a class="dropdown-item" href="/addfooditem">Add a food item</a>
+                </div>
+            </li> <?php } ?>
         </ul>
         <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
             <?php if (isset($_SESSION["username"])) {

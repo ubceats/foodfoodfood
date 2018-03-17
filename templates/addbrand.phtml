@@ -1,0 +1,28 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+
+    <h2>Add a brand</h2>
+
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name">
+            <small class="form-text text-muted">The name of a brand, for instance <mark>Starbucks</mark> or <mark>Mercante</mark>.</small>
+        </div>
+        <div class="form-group">
+            <label for="url">URL</label>
+            <input type="text" class="form-control" id="url" name="url" placeholder="https://">
+            <small class="form-text text-muted">The URL to a webpage with information regarding the brand.</small>
+        </div>
+        <div class="form-group">
+            <label for="desc">Description</label>
+            <textarea class="form-control" id="desc" name="desc" rows="2"></textarea>
+            <small class="form-text text-muted">A short description of the brand, for instance <mark>Offers a selection of items including Asian cuisine, daily pasta, pizza, burgers, made-to-order sandwiches and sweet desserts.</mark></small>
+        </div>
+        <button type="submit" class="btn btn-primary">Insert into database</button>
+    </form>
+
+</main>
+
+<?php include "footer.phtml"; ?>
