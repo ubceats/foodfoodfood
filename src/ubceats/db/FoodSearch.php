@@ -138,9 +138,7 @@ WHERE f.brandName = b.name
 
         while ($onerow = $query->fetch_assoc()) {
             array_push($arr, $onerow);
-            DatabaseLogger::sendLog(var_export($onerow, true));
         }
-
 
         return OpenTimeDecorator::addCurrentStates($this->runSort($this->groupVenues($arr)));
 
