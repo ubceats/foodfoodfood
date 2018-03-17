@@ -19,6 +19,9 @@ class Login extends GenericRoute
 
         if ($loginResult) {
             $_SESSION["username"] = $attempted_username;
+            if ($loginResult == "admin") {
+                $_SESSION["isAdmin"] = 1;
+            }
             return $this->container->get('renderer')->render($response, 'loginsucceeded.phtml', $args);
         } else {
             return $this->container->get('renderer')->render($response, 'loginfailed.phtml', $args);

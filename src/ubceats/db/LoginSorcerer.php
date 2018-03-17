@@ -25,14 +25,21 @@ class LoginSorcerer extends DbQuery
     }
 
     /**
-     * @return bool whether login was successful or not
+     * @return string|bool "user", "admin" or false if login failed
      */
-    public function tryLogin() : bool
-    {
-        // Yes, this is not secure. No hashes or anything. But it's a project.
-        $result = $this->query("SELECT password FROM users WHERE username = '".$this->attempt_username."';");
+    public function tryLogin() {
+        // Yes, this is not secure. No hashes, salt or anything. But it's a project.
+        $result = $this->query("SELECT password, isAdmin FROM users WHERE username = '".$this->attempt_username."';");
         $dbPasswordAssoc = $result->fetch_assoc();
-        return $dbPasswordAssoc["password"] == $this->attempt_password;
+        if ($dbPasswordAssoc["password"] == $this->attempt_password) {
+            if ($dbPasswordAssoc["isAdmin"] == 1) {
+                return "admin";
+            } else {
+                return "user";
+            }
+        } else {
+            return false;
+        }
     }
 
     public function runQuery()
