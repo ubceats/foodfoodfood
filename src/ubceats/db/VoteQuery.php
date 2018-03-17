@@ -22,9 +22,9 @@ class VoteQuery extends DbQuery
     public function runQuery()
     {
         if ($this->isPositive) {
-            $this->getDb()->query("UPDATE food_items SET rating = rating + 1 WHERE id = '" .$this->getDb()->real_escape_string($this->foodItemId) . "'");
+            $this->query("UPDATE food_items SET rating = rating + 1 WHERE id = '" .$this->getDb()->real_escape_string($this->foodItemId) . "'");
         } else {
-            $this->getDb()->query("UPDATE food_items SET rating = rating - 1 WHERE id = '" .$this->getDb()->real_escape_string($this->foodItemId) . "'");
+            $this->query("UPDATE food_items SET rating = rating - 1 WHERE id = '" .$this->getDb()->real_escape_string($this->foodItemId) . "'");
         }
     }
 
