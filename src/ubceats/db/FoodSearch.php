@@ -39,33 +39,32 @@ class FoodSearch extends DbQuery {
         $venues = [];
 
         foreach ($arr as $foodItem){
-            if(!isset($venues[$foodItem['venue_id']])){
-                $venues[$foodItem['venue_id']] = [
+            if(!isset($venues[$foodItem['brandName'] . $foodItem['locationName'] . $foodItem['locationAddress']])){
+                $venues[$foodItem['brandName'] . $foodItem['locationName'] . $foodItem['locationAddress']] = [
                     "food_items" => [],
+                    "locations" => [],
                     "rating" => 0,
                     "price" => 0,
                     "url" => $foodItem['url'],
-                    "phoneNumber" => $foodItem['phoneNumber'],
+                    "phoneNumber" => 'FUCK THAT!',
                     "lat" => $foodItem['latitude'],
                     "lon" => $foodItem['longitude'],
-                    "name" => $foodItem['venue_name'],
-                    "description" => $foodItem['venue_description'],
-                    "mealPlan" => $foodItem['mealPlan'],
-                    "flexDollars" => $foodItem['flexDollars'],
+                    "name" => $foodItem['brandName'],
+                    "description" => $foodItem['desc'],
                     "opensAt" => ($foodItem['opensAt'] < 1000 &&  $foodItem['opensAt'] != -1 ? "0" . $foodItem['opensAt'] : $foodItem['opensAt']),
                     "closesAt" => ($foodItem['closesAt'] < 1000 && $foodItem['closesAt'] != -1? "0" . $foodItem['closesAt'] : $foodItem['closesAt']),
                     "venue_id" => $foodItem['venue_id']
                 ];
             }
 
-            $venues[$foodItem['venue_id']]["food_items"][] = [
+
+            $venues[$foodItem['brandName'] . $foodItem['locationName'] . $foodItem['locationAddress']]["food_items"][] = [
                "price" => $foodItem['price'],
-               "item_name" => ucwords(strtolower($foodItem['item_name'])),
+               "item_name" => ucwords(strtolower($foodItem['foodName'])),
                "rating" => $foodItem['rating'],
                 "gluten_free" => $foodItem['gluten_free'],
                 "vegan" =>  $foodItem['vegan'],
-                "vegetarian" => $foodItem['vegetarian'],
-                "food_item_id" => $foodItem['food_item_id']
+                "vegetarian" => $foodItem['vegetarian']
             ];
 
         }
@@ -112,7 +111,7 @@ class FoodSearch extends DbQuery {
             $date = 7;
         }
 
-        $query = "SELECT *
+        $query = "SELECT *, f.name AS foodName
 FROM food_items f, brand b, locations l, opening_times o
 WHERE f.brandName = b.name
       AND o.brandName = b.name
