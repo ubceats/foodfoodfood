@@ -3,7 +3,7 @@
 <main role="main" class="container">
     <ul>
     <?php foreach ($venues as $venue) : ?>
-        <li><? echo $venue ?></li>
+        <li><? echo '<a href="/brand/' . urlencode($venue) . '">' . $venue . '</a>' ?></li>
     <?php endforeach; ?>
     </ul>
 </main>
