@@ -17,6 +17,10 @@
     <link href="/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
 
+    <!-- Highlight css -->
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
     <!-- UBC font: PT Sans -->
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
 
@@ -78,9 +82,9 @@
 
 <?php
 echo "<small>";
-echo "<main role=\"main\" class=\"container\"><code><b>".sizeof($GLOBALS["mysqlLogs"])." queries were run to generate this page.</b></code></main>";
+echo "<main role=\"main\" class=\"container\"><code><b>".sizeof($GLOBALS["mysqlLogs"]) . (sizeof($GLOBALS["mysqlLogs"]) === 1  ? " query was" : " queries were") . " run to generate this page.</b></code></main>";
 foreach ($GLOBALS["mysqlLogs"] as $item){
-    echo "<main role=\"main\" class=\"container\"><code>".$item."</code></main>";
+    echo "<main role=\"main\" class=\"container\"><pre><code class=\"sql\">".$item."</code></pre></main>";
 }
 echo "</small><br/>";
 ?>
