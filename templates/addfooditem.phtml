@@ -1,0 +1,45 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+
+    <h2>Add a food item</h2>
+
+    <form method="get" action="/addfooditem">
+        <?php
+        if ($didInsert) {
+            if (is_null($error)) { ?>
+            <div class="alert alert-success" role="alert">
+                <p>The new food item <code><?php echo $lastName; ?></code> was successfully pushed to the database.</p>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, but the food item insertion failed. MySQL returned the following error:</p>
+                <code><?php echo $error; ?></code>
+            </div>
+            <?php }
+            } ?>
+        <div class="form-group">
+            <label for="brand">Brand</label>
+            <select class="form-control" id="brand" name="brand">
+                <?php foreach ($brands as $brand) {
+                    echo "<option>".$brand["name"]."</option>";
+                } ?>
+            </select>
+            <small class="form-text text-muted">The brand where the new food item is available for purchase.</small>
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name">
+            <small class="form-text text-muted">The name of the food item, for instance <mark>Prosciutto Pizza</mark>.</small>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price">
+            <small class="form-text text-muted">The price of the food item in dollars, for instance <mark>6.55</mark>.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Insert into database</button>
+    </form>
+
+</main>
+
+<?php include "footer.phtml"; ?>

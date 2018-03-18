@@ -20,3 +20,4 @@ $app->get('/logout', \ubceats\routes\Logout::class);
 $app->get('/addbrand', \ubceats\routes\AddBrand::class);
 $app->get('/addlocation', \ubceats\routes\AddLocation::class);
 $app->get('/assocbrandloc', \ubceats\routes\AssociateBrandLocation::class);
+$app->get('/addfooditem', \ubceats\routes\AddFoodItem::class);
