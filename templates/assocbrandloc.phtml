@@ -1,0 +1,44 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+
+    <h2>Associate a brand with a location</h2>
+
+    <form method="get" action="/assocbrandloc">
+        <?php
+        if ($didInsert) {
+            if (is_null($error)) { ?>
+            <div class="alert alert-success" role="alert">
+                <p>The new association between <code><?php echo $lastBrandName; ?></code> and <code><?php echo $lastLocationName; ?></code> was successfully pushed to the database.</p>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, but the brand-location association failed. MySQL returned the following error when inserting:</p>
+                <code><?php echo $error; ?></code>
+            </div>
+            <?php }
+            } ?>
+
+        <div class="form-group">
+            <label for="brand">Brand <*> occupies...</label>
+            <select class="form-control" id="brand" name="brand">
+                <?php foreach ($brands as $brand) {
+                    echo "<option>".$brand["name"]."</option>";
+                } ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="location">... location <*></label>
+            <select class="form-control" id="location" name="location">
+                <?php foreach ($locations as $location) {
+                    echo "<option>".$location["name"]." | ".$location["address"]."</option>";
+                } ?>
+
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Insert into database</button>
+    </form>
+
+</main>
+
+<?php include "footer.phtml"; ?>

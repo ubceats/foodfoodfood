@@ -3,6 +3,7 @@
 !/logs/README.md
 db.json
 .idea/workspace.xml
+.idea/*
 composer.phar
 ubceats.iml
 key.pem
