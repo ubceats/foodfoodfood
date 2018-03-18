@@ -10,9 +10,9 @@ class BrandLocationAssociation extends DbQuery
 
     public function __construct(string $brandName, string $locationName, string $locationAddress)
     {
-        $this->$brandName = $brandName;
-        $this->$locationName = $locationName;
-        $this->$locationAddress = $locationAddress;
+        $this->brandName = $brandName;
+        $this->locationName = $locationName;
+        $this->locationAddress = $locationAddress;
     }
 
     /**
@@ -22,7 +22,8 @@ class BrandLocationAssociation extends DbQuery
      * return true and false on failure.
      */
     public function pushAssociationToDB() {
-        $result = $this->query("INSERT INTO occupies (brandName, locationName, locationAddress) VALUES ('".$this->brandName."', '".$this->locationName."', '".$this->locationAddress."');");
+        $result = $this->query("INSERT INTO occupies (brandName, locationName, locationAddress)
+                      VALUES ('".$this->brandName."', '".$this->locationName."', '".$this->locationAddress."');");
         return $result;
     }
 
