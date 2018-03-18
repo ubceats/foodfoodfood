@@ -1,0 +1,11 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+    <div class="card">
+        <div class="card-body">
+            There are <mark><?php echo $data["count"] ?></mark> food items sold at UBC. They range from  <mark><?php echo $data["min"] ?></mark> to <mark><?php echo $data["max"] ?></mark>. The average is <mark><?php echo $data["avg"] ?></mark>. To buy everything in our database it would cost <mark><?php echo $data["sum"] ?></mark>.
+        </div>
+    </div>
+</main>
+
+<?php include "footer.phtml"; ?>

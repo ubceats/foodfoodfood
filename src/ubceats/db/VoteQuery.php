@@ -4,24 +4,31 @@ namespace ubceats\db;
 
 class VoteQuery extends DbQuery
 {
-    private $foodItemId;
+    private $brandName;
+    private $foodItemName;
     private $isPositive;
+    private $rating;
 
     /**
      * VoteQuery constructor.
-     * @param $foodItemId
+     * @param $brandName
+     * @param $foodItemName
      * @param $isPositive
+     * @param $rating
      */
-    public function __construct($foodItemId, bool $isPositive)
+    public function __construct($brandName, $foodItemName, $isPositive, $rating)
     {
-        $this->foodItemId = $foodItemId;
+        $this->brandName = $brandName;
+        $this->foodItemName = $foodItemName;
         $this->isPositive = $isPositive;
+        $this->rating = $rating;
     }
 
 
     public function runQuery()
     {
-        // FUCK THIS SHIT!!!
+        $result = $this->query("INSERT INTO votes (isUpvote, review, username, foodItemName, brandName) VALUES (" . +$this->isPositive . ",'" . $this->getDb()->escape_string($this->rating) . "', '" .  $_SESSION['username'] . "','" . $this->foodItemName . "', '" . $this->brandName . "')");
+
     }
 
 

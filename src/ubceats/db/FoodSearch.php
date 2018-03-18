@@ -53,7 +53,7 @@ class FoodSearch extends DbQuery {
                     "description" => $foodItem['desc'],
                     "opensAt" => ($foodItem['opensAt'] < 1000 &&  $foodItem['opensAt'] != -1 ? "0" . $foodItem['opensAt'] : $foodItem['opensAt']),
                     "closesAt" => ($foodItem['closesAt'] < 1000 && $foodItem['closesAt'] != -1? "0" . $foodItem['closesAt'] : $foodItem['closesAt']),
-                    "venue_id" => $foodItem['venue_id']
+                    "venue_id" => str_replace(' ', '', $foodItem['brandName'] . $foodItem['locationName'] . $foodItem['locationAddress'])
                 ];
             }
 
@@ -138,7 +138,9 @@ WHERE f.brandName = b.name
 
         while ($onerow = $query->fetch_assoc()) {
             array_push($arr, $onerow);
+            //DatabaseLogger::sendLog(var_export($onerow, true));
         }
+
 
         return OpenTimeDecorator::addCurrentStates($this->runSort($this->groupVenues($arr)));
 
