@@ -10,7 +10,7 @@ abstract class DbQuery{
     }
 
     protected function query($str){
-        DatabaseLogger::sendLog($str);
+        DatabaseLogger::sendLog($str, $this);
         return $this->getDb()->query($str);
     }
 
