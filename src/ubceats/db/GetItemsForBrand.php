@@ -2,7 +2,11 @@
 
 namespace ubceats\db;
 
-
+/**
+ * Class GetItemsForBrand
+ * @package ubceats\db
+ * @checklist Join query
+ */
 class GetItemsForBrand extends DbQuery
 {
     private $name;

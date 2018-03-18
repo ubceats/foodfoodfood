@@ -2,6 +2,11 @@
 
 namespace ubceats\db;
 
+/**
+ * Class ListBrands
+ * @package ubceats\db
+ * @checklist Selection query
+ */
 class ListBrands extends DbQuery
 {
 

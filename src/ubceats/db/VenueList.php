@@ -2,7 +2,11 @@
 
 namespace ubceats\db;
 
-
+/**
+ * Class VenueList
+ * @package ubceats\db
+ * @checklist Selection query
+ */
 class VenueList extends DbQuery {
     public function runQuery()
     {

@@ -1,7 +1,11 @@
 <?php
 namespace ubceats\db;
 
-
+/**
+ * Class CostQuery
+ * @package ubceats\db
+ * @checklist Aggregation query
+ */
 class CostQuery extends DbQuery{
 
     public function runQuery(){

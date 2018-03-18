@@ -1,7 +1,10 @@
 <?php
 namespace ubceats\db;
 
-
+/**
+ * Class DbQuery
+ * @package ubceats\db
+ */
 abstract class DbQuery{
     abstract public function runQuery();
 
@@ -10,7 +13,15 @@ abstract class DbQuery{
     }
 
     protected function query($str){
-        DatabaseLogger::sendLog($str, $this);
+        $rc = new \ReflectionClass($this);
+        $com = $rc->getDocComment();
+        preg_match("`@checklist (.*)`", $com, $matches);
+        if(count($matches) > 0){
+            DatabaseLogger::sendLog($str, $this, $matches[1]);
+        }
+        else{
+            DatabaseLogger::sendLog($str, $this);
+        }
         return $this->getDb()->query($str);
     }
 

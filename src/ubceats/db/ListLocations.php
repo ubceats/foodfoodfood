@@ -2,6 +2,11 @@
 
 namespace ubceats\db;
 
+/**
+ * Class ListLocations
+ * @package ubceats\db
+ * @checklist Selection query
+ */
 class ListLocations extends DbQuery
 {
 
