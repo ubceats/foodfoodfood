@@ -1,6 +1,24 @@
 <?php include "header.phtml"; ?>
 
 <main role="main" class="container">
+
+
+    <h2>Menu</h2>
+
+    <ul class="list-group">
+        <?php foreach ($menu as $item): ?>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <? echo $item["name"] ?>
+            <div class="align-ri">
+                <span class="badge badge-primary badge-pill">$<? echo $item["price"] ?></span>
+                <span class="badge badge-warning badge-pill"><? echo ($item["total"] == null ? "N/A" : $item["total"]) ?></span>
+            </div>
+        </li>
+        <? endforeach; ?>
+    </ul>
+
+
+    <h2>Locations</h2>
     <div class="row">
     <?php foreach ($locations as $location): ?>
     <div class="col-md-4">
@@ -11,8 +29,6 @@
 
                 <h6 class="card-subtitle mb-2 text-muted"><?php echo $location['address'] ?></h6>
                 <p class="card-text"><?php echo ($location['opensAt'] != null ? ($location['opensAt'] == -1 ? "Not open today" : $location['opensAt'] . "-" . $location['closesAt']) : "No times for today.") ?></p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
             </div>
         </div>
     </div>

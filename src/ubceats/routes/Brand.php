@@ -6,6 +6,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use ubceats\db\CostQuery;
 use ubceats\db\DatabaseLogger;
+use ubceats\db\GetItemsForBrand;
 use ubceats\db\GetLocationsForBrand;
 
 class Brand extends GenericRoute
@@ -17,7 +18,8 @@ class Brand extends GenericRoute
         // Render index view
         return $this->container->get('renderer')->render($response, 'brand.phtml', [
             "brand" => urldecode($args['name']),
-            "locations" => (new GetLocationsForBrand($args['name']))()
+            "locations" => (new GetLocationsForBrand($args['name']))(),
+            "menu" => (new GetItemsForBrand($args['name']))()
         ]);
     }
 }
