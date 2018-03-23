@@ -9,6 +9,11 @@ use ubceats\db\Sorts\RatingSort;
 use ubceats\OpenTimeDecorator;
 use ubceats\util\LatLon;
 
+/**
+ * Class FoodSearch
+ * @package ubceats\db
+ * @checklist DEPRECATED QUERY
+ */
 class FoodSearch extends DbQuery {
 
     static $VENUE_FILTERS = ['mealPlan', 'flexDollars'];
