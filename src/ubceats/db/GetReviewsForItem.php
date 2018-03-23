@@ -23,7 +23,7 @@ class GetReviewsForItem extends DbQuery{
 
 
     public function runQuery(){
-        $avg = $this->query("SELECT AVG(isUpvote) AS avg FROM votes WHERE brandName = '{$this->getDb()->escape_string($this->brandName)}' AND foodItemName = '{$this->getDb()->escape_string($this->itemName)}'");
+        $avg = $this->query("SELECT (((AVG(isUpvote)*100)+100)/2) AS avg FROM votes WHERE brandName = '{$this->getDb()->escape_string($this->brandName)}' AND foodItemName = '{$this->getDb()->escape_string($this->itemName)}'");
 
         $avg = $avg->fetch_assoc();
 
