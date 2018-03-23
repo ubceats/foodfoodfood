@@ -1,30 +1,46 @@
 # UBCEats.ca 🧀🌭🍕
 
-This project was developed over the course of 18 hours by Ian Del Rio, Andrea Gottardo and Noah Heyl at nwHacks '18.
+## Prerequisites
 
-## Inspiration
+Before getting started with UBCeats you will need PHP7 and composer installed. You will also need a web server. UBCeats works with Apache and the builtin PHP web server out of the box.
 
-Information regarding food items at UBC is hard to find. It is easy to look for venues, but not so easy to access their menus. And most importantly, there's no centralized place to look for venues based on your food preferences. We want to change that.
 
-## What it does
+## Getting the code
 
-UBCEats is a search engine that allows you to look for venues at UBC offering specific food items. For instance, you can search for `pizza` and get back all places at UBC where you can get some kind of pizza. Additionally, you can filter results by the distance of the venue, and by whether your meal plan is accepted or not.
+```sh
+$ git clone git@github.com:ubceats/foodfoodfood.git
+$ cd foodfoodfood
+```
 
-## How we built it
+## Installing dependencies
 
-UBCEats is powered by a PHP/MySQL backend, and a HTML/CSS frontend based on Bootstrap. Entering of food items into the database was performed both by scraping where feasible, and by human-powered manual insertion. Geo-location is powered by JavaScript.
+ ```sh
+ $ composer install
+ OR
+ $ php path/to/composer.phar install
+ ```
+ 
+## Config database connection  
+To tell UBCEats how to connect to your database you must create a file called `db.json` in the main project directory. The content should be of the format.
 
-## Challenges we ran into
+```json
+{
+  "hostname": "sql.example.com",
+  "user": "db_username",
+  "password": "password123",
+  "dbName": "db_name"
+}
+```
 
-Nothing too serious. One major issue was that UBC Food Services provides the vast majority of their menu in PDF format. It was almost impossible to scrape those programmatically.
+## Provisioning the database
 
-## Accomplishments that we're proud of
+Upon completion of the project we will upload a final `.sql` file for provisioning the database. 
 
-We're offering something useful to the entire UBC community! In particular, students can look for places that accept their meal plan easily.
 
-## What's next for UBCEats
+## Starting the app
+If you are using the builtin PHP server, you can do
 
-- Users should be able to update the database with new food items, new prices, as menus get updated.
-- Users should be able to leave reviews.
-- Food items descriptions should be more specific and relevant.
-- Provide images of food items, where possible.
+```sh
+$ cd path/to/foodfoodfood
+$ php -S localhost:8080 -t public public/index.php
+```
