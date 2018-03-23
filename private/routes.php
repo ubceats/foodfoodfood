@@ -11,6 +11,7 @@ $app->get('/vote/{foodItemId}/{direction}', \ubceats\routes\Vote::class);
 
 
 $app->get('/brand/{name}', \ubceats\routes\Brand::class);
+$app->get('/brand/{brand}/{item}', \ubceats\routes\FoodItem::class);
 
 // Login/logout
 $app->get('/login', \ubceats\routes\Login::class);
