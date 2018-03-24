@@ -28,7 +28,7 @@
                 <h5 class="card-title"><?php echo $location['name'] ?></h5>
 
                 <h6 class="card-subtitle mb-2 text-muted"><?php echo $location['address'] ?></h6>
-                <p class="card-text"><?php echo ($location['opensAt'] != null ? ($location['opensAt'] == -1 ? "Not open today" : $location['opensAt'] . "-" . $location['closesAt']) : "No times for today.") ?></p>
+                <p class="card-text">Open: <?php echo ($location['opensAt'] != null ? ($location['opensAt'] == -1 ? "Not open today" : $location['opensAt'] . "-" . $location['closesAt']) : "No times for today.") ?></p>
             </div>
         </div>
     </div>

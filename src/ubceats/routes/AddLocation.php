@@ -21,11 +21,20 @@ class AddLocation extends GenericRoute
             $address = $request->getParam("address");
             $latitude = $request->getParam("latitude");
             $longitude = $request->getParam("longitude");
-            $insertion = new LocationInsertion($name, $address, $latitude, $longitude);
-            $insertionResult = $insertion->pushLocationToDB();
-            if (!$insertionResult) {
-                // insertion failed, let's set the error
-                $error = mysqli_error($insertion->getDb());
+            // TODO: add CHECK constraint
+            $locationOK = $latitude >= -123.27 &&
+                           $latitude <= -123.22 &&
+                           $longitude >= 49.241 &&
+                           $longitude <= 49.283;
+            if ($locationOK) {
+                $insertion = new LocationInsertion($name, $address, $latitude, $longitude);
+                $insertionResult = $insertion->pushLocationToDB();
+                if (!$insertionResult) {
+                    // insertion failed, let's set the error
+                    $error = mysqli_error($insertion->getDb());
+                }
+            } else {
+                $error = "CHECK constraint failed. The location is outside the UBC campus.";
             }
         } else {
             $didInsert = false;
