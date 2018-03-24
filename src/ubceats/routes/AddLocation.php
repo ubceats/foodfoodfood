@@ -22,10 +22,11 @@ class AddLocation extends GenericRoute
             $latitude = $request->getParam("latitude");
             $longitude = $request->getParam("longitude");
             // TODO: add CHECK constraint
-            $locationOK = $latitude >= -123.27 &&
-                           $latitude <= -123.22 &&
-                           $longitude >= 49.241 &&
-                           $longitude <= 49.283;
+            $locationOK = $longitude >= -123.27 &&
+                           $longitude <= -123.22 &&
+                           $latitude >= 49.241 &&
+                           $latitude <= 49.283;
+
             if ($locationOK) {
                 $insertion = new LocationInsertion($name, $address, $latitude, $longitude);
                 $insertionResult = $insertion->pushLocationToDB();
