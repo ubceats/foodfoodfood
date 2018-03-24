@@ -1,0 +1,33 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+
+    <h2>Delete a brand</h2>
+
+    <form method="get" action="/rmbrand">
+        <?php
+        if ($didRemove) {
+            if (is_null($error)) { ?>
+            <div class="alert alert-success" role="alert">
+                <p>The brand <code><?php echo $lastName; ?></code> was successfully removed from the database.</p>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, but the brand deletion failed. MySQL returned the following error:</p>
+                <code><?php echo $error; ?></code>
+            </div>
+        <?php } } ?>
+        <div class="form-group">
+            <label for="brand">Select a brand to delete</label>
+            <select class="form-control" id="brand" name="brand">
+                <?php foreach ($brands as $brand) {
+                    echo "<option>".$brand["name"]."</option>";
+                } ?>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Delete from database</button>
+    </form>
+
+</main>
+
+<?php include "footer.phtml"; ?>
