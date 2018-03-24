@@ -3,12 +3,12 @@
 namespace ubceats\db;
 
 
-class GetCategory extends DbQuery
+class GetFoodItems extends DbQuery
 {
     private $name;
 
     /**
-     * GetCategory constructor.
+     * GetFoodItems constructor.
      * @param $name
      */
     public function __construct()
@@ -18,7 +18,7 @@ class GetCategory extends DbQuery
     public function runQuery()
     {
 
-        $q = $this->query("SELECT * FROM categories;");
+        $q = $this->query("SELECT * FROM food_items;");
 
 
         $arr = [];
