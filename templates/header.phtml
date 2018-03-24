@@ -37,10 +37,10 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/about">WTF is this?</a>
+                <a class="nav-link" href="/about">About this</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/list">Brand list</a>
+                <a class="nav-link" href="/list">Brands list</a>
             </li>
             <?php if (isset($_SESSION["isAdmin"])) { ?>
             <li class="nav-item dropdown">
@@ -48,11 +48,16 @@
                     Add things
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/addlocation">Add a location</a>
-                    <a class="dropdown-item" href="/addbrand">Add a brand</a>
-                    <a class="dropdown-item" href="/assocbrandloc">Associate a brand with a location</a>
-                    <a class="dropdown-item" href="/addfooditem">Add a food item</a>
-                    <a class="dropdown-item" href="/assocfooditemcategory">Associate a food item with a category</a>
+                    <a class="dropdown-item" href="/addlocation"><i class="ion-plus-round"></i> Add a location</a>
+                    <a class="dropdown-item" href="/addbrand"><i class="ion-plus-round"></i> Add a brand</a>
+                    <a class="dropdown-item" href="/addfooditem"><i class="ion-plus-round"></i> Add a food item</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/assocbrandloc"><i class="ion-link"></i> Associate a brand with a
+                        location</a>
+                    <a class="dropdown-item" href="/assocbrandcategory"><i class="ion-link"></i> Associate a brand with
+                        a category</a>
+                    <a class="dropdown-item" href="/assocfooditemcategory"><i class="ion-link"></i> Associate a food
+                        item with a category</a>
                 </div>
             </li>
 
@@ -61,8 +66,8 @@
                     Delete things
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/rmlocation">Delete location</a>
-                    <a class="dropdown-item" href="/rmbrand">Delete brand</a>
+                    <a class="dropdown-item" href="/rmlocation"><i class="ion-trash-a"></i> Delete location</a>
+                    <a class="dropdown-item" href="/rmbrand"><i class="ion-trash-a"></i> Delete brand</a>
                 </div>
             </li>
 
@@ -70,8 +75,14 @@
         </ul>
         <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
             <?php if (isset($_SESSION["username"])) {
-                ?><li class="nav-item order-2 order-md-1"><span class="navbar-text">Logged in as <b><?php echo $_SESSION["username"]; ?></b>
-                    <?php if (isset($_SESSION["isAdmin"])) { echo " <i class=\"ion-flash text-warning\"></i>"; } ?> <a href="/logout"><button class="btn btn-outline-secondary">Log out</button></a></span></li> <?php
+                ?>
+                <li class="nav-item order-2 order-md-1"><span class="navbar-text"><i
+                                class="ion-person"></i> <b><?php echo $_SESSION["username"]; ?></b>
+                        <?php if (isset($_SESSION["isAdmin"])) {
+                            echo " <i class=\"ion-flash text-warning\"></i>";
+                        } ?> <a href="/logout"><button
+                                    class="btn btn-outline-secondary btn-sm">Log out</button></a></span>
+                </li> <?php
             } else { ?><li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
             <li class="dropdown order-1">
                 <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
@@ -102,13 +113,19 @@
 
         </div>
         <div class="col-md-2">
+
         <a class="btn btn-outline-info btn-block btn-sm" data-toggle="collapse" href="#queryCollapse" role="button" aria-expanded="false" aria-controls="queryCollapse">
-            Queries <span class="badge badge-light"><?php echo sizeof($GLOBALS["mysqlLogs"]); ?> </span>
+            <i class="ion-hammer"></i> Queries <span
+                    class="badge badge-light"><?php echo sizeof($GLOBALS["mysqlLogs"]); ?> </span>
         </a>
         </div>
     </div>
 </div>
 <div class="collapse" id="queryCollapse">
+    <main role="main" class="container">
+        <a class="btn btn-warning btn-sm float-right" href="/serverinfo.php" role="button">
+            <i class="ion-information-circled"></i> Server information
+        </a></main>
 <?php
 echo "<small>";
 echo "<main role=\"main\" class=\"container\"><code><b>".sizeof($GLOBALS["mysqlLogs"]) . (sizeof($GLOBALS["mysqlLogs"]) === 1  ? " query was" : " queries were") . " run to generate this page.</b></code></main>";

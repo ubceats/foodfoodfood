@@ -1,34 +1,49 @@
 <?php include "header.phtml"; ?>
 
 <main role="main" class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/list">Brands</a></li>
+            <li class="breadcrumb-item"><?php echo $brand['name']; ?></li>
+        </ol>
+    </nav>
+
     <?php if($brand !== null){?>
     <div class="jumbotron">
         <a class="btn btn-primary  btn-sm float-right"
            href="<?php echo $brand['url']; ?>"><span class="ion-link"></span>  <?php echo parse_url($brand['url'])['host']; ?></a>
         <h1 class="display-4"><?php echo $brand['name']; ?></h1>
-        <p class="lead"><?php echo $brand['desc']; ?></p>
+        <p class="lead text-justify"><?php echo(($brand['desc'] == "") ? "<span class=\"text-muted\">We currently don't have a description for this brand in our database.</span>" : $brand['desc']); ?></p>
 
 
 
     </div>
 
-    <h2>Menu</h2>
+        <h2>Menu <span class="badge badge-secondary"><?php echo sizeof($menu); ?></span></h2>
 
     <ul class="list-group">
         <?php foreach ($menu as $item): ?>
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <a href="/brand/<?php echo urlencode($brand['name']) ?>/<?php echo urlencode($item["name"]) ?>"><?php echo $item["name"] ?></a>
             <div class="align-ri">
-                <span class="badge badge-primary badge-pill">$<?php echo $item["price"] ?></span>
-                <span class="badge badge-warning badge-pill"><?php echo ($item["total"] == null ? "N/A" : $item["total"]) ?></span>
+                <span class="badge badge-primary">$<?php echo number_format((float)$item["price"], 2, '.', ''); ?></span>
+                <span class="badge badge-warning"><i
+                            class="ion-compose"></i> <?php echo($item["total"] == null ? "N/A" : $item["total"]) ?></span>
             </div>
         </li>
         <?php endforeach; ?>
     </ul>
+        <?php if (sizeof($menu) == 0) { ?>
+            <div class="alert alert-warning" role="alert">
+                <b>Sad!</b> This brand has no food items in the database. How about <a href="/addfooditem">adding
+                    one</a> now?
+            </div>
+        <?php } ?>
+        <br/>
 
-
-    <h2>Locations</h2>
-    <div class="row">
+        <h2>Locations <span class="badge badge-secondary"><?php echo sizeof($locations); ?></span></h2>
+        <div class="row">
     <?php foreach ($locations as $location): ?>
     <div class="col-md-4">
         <div class="card" style="margin: 10px">
@@ -37,11 +52,22 @@
                 <h5 class="card-title"><?php echo $location['name'] ?></h5>
 
                 <h6 class="card-subtitle mb-2 text-muted"><?php echo $location['address'] ?></h6>
-                <p class="card-text">Open: <?php echo ($location['opensAt'] != null ? ($location['opensAt'] == -1 ? "Not open today" : $location['opensAt'] . "-" . $location['closesAt']) : "No times for today.") ?></p>
+                <p class="card-text">
+                    <small>
+                        <i class="ion-clock"></i> <?php echo($location['opensAt'] != null ? ($location['opensAt'] == -1 ? "Not open today" : $location['opensAt'] . " - " . $location['closesAt'] . " <span class=\"text-muted\">today</span>") : "No times for today.") ?>
+                    </small>
+                </p>
             </div>
         </div>
-    </div>
+
     <?php endforeach; ?>
+    </div>
+            <?php if (sizeof($locations) == 0) { ?>
+                <div class="alert alert-warning" role="alert">
+                    <b>Sad!</b> This brand has no locations in the database. How about <a href="/addlocation">adding
+                        one</a> now?
+                </div>
+            <?php } ?>
     </div>
 
     <?php

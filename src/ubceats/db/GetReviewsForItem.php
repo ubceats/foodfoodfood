@@ -27,7 +27,7 @@ class GetReviewsForItem extends DbQuery{
 
         $avg = $avg->fetch_assoc();
 
-        $reviews = $this->query("SELECT isUpvote, review FROM votes WHERE brandName = '{$this->getDb()->escape_string($this->brandName)}' AND foodItemName = '{$this->getDb()->escape_string($this->itemName)}'");
+        $reviews = $this->query("SELECT isUpvote, review, timestamp, username FROM votes WHERE brandName = '{$this->getDb()->escape_string($this->brandName)}' AND foodItemName = '{$this->getDb()->escape_string($this->itemName)}'");
 
         $arr = [];
         while ($onerow = $reviews->fetch_assoc()) {

@@ -2,26 +2,110 @@
 
 <main role="main" class="container">
 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/list">Brands</a></li>
+            <li class="breadcrumb-item"><a href="/brand/<?php echo urlencode($brand); ?>"><?php echo $brand; ?></a></li>
+            <li class="breadcrumb-item active" aria-current="page"><?php echo $foodItem["name"]; ?></li>
+        </ol>
+    </nav>
 
-    <h2><? echo $foodItem["name"]; ?></h2>
+    <br/>
 
+    <h2>
+        <?php echo $foodItem["name"]; ?>
+        <small class="text-muted">Available at <i><?php echo $brand; ?></i></small>
+    </h2>
 
-    <form action="/vote" method="post">
-        <input type="hidden" class="form-control" name="brandName" value="<? echo $brand; ?>">
-        <input type="hidden" class="form-control" name="foodItemName" value="<? echo $foodItem["name"]; ?>">
+    <table class="table table-bordered" style="width: auto;">
+        <tbody>
+        <tr>
+            <th scope="row">Price:</th>
+            <td><span class="text-muted">$</span><?php echo $foodItem["price"]; ?></td>
+        </tr>
+        <tr>
+            <th scope="row">Average rating:</th>
+            <td><?php echo round($reviews["avg"]); ?><span class="text-muted">%</span></td>
+        </tr>
+        <tr>
+            <th scope="row">Categories:</th>
+            <td>
+                <?php if (sizeof($cats) == 0) { ?>
+                    <small class="text-muted">Not found in any category. Sad!</small>
+                <?php } ?>
+                <?php foreach ($cats as $cat) { ?>
+                    <span class="badge badge-primary"><?php echo $cat["categoryName"]; ?></span>
+                <?php } ?>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
 
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="isUpvote" name="isUpvote">
-            <label class="form-check-label" for="isUpvote">Do you want to upvote?</label>
+    <h4>Reviews
+        <span class="badge badge-secondary"><?php echo sizeof($reviews["reviews"]); ?></span>
+        <small class="text-muted">Ratings and reviews left by users</small>
+    </h4>
+    <?php if (sizeof($reviews["reviews"]) == 0) { ?>
+        <div class="alert alert-info" role="alert">
+            No reviews were found in the database for this food item.
         </div>
+    <?php } else { ?>
+        <div class="list-group">
+            <?php foreach ($reviews["reviews"] as $review) { ?>
+                <span class="list-group-item list-group-item-action flex-column align-items-start">
 
-        <div class="form-group">
-            <label for="review">Review</label>
-            <textarea class="form-control" id="review" name="review" rows="2"></textarea>
+                <div class="d-flex w-100 justify-content-between">
+
+                    <small><i><?php echo(($review["username"] == "") ? "anonymous" : $review["username"]); ?></i> said:</small>
+                </div>
+                <h1 class="float-right"><i
+                            class="ion-thumbs<?php echo(($review["isUpvote"] == 1) ? "up" : "down"); ?>"></i></h1>
+                <p class="mb-1"><?php echo $review["review"]; ?></p>
+                <small class="text-muted">Review added @ <?php echo $review["timestamp"]; ?></small>
+            </span>
+            <?php } ?>
         </div>
+    <?php } ?>
+    <br/>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+                            aria-controls="collapseOne">
+                        Add a review for this item
+                    </button>
+                </h5>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Post review</button>
-    </form>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <form action="/vote" method="post">
+                        <input type="hidden" class="form-control" name="brandName" value="<?php echo $brand; ?>">
+                        <input type="hidden" class="form-control" name="foodItemName"
+                               value="<?php echo $foodItem["name"]; ?>">
+
+
+                        <div class="form-check">
+                            <p>
+                                <input type="checkbox" class="form-check-input" id="isUpvote" name="isUpvote">
+                                <label class="form-check-label" for="isUpvote">I liked this item (upvote).</label>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="review" name="review" rows="2"
+                                      placeholder="Write your review here..."></textarea>
+                            <small class="form-text text-muted">Your review will be associated with your username.
+                            </small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Post your review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </main>

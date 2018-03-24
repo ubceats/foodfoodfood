@@ -1,6 +1,13 @@
 <?php include "header.phtml"; ?>
 
 <main role="main" class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Brands</li>
+        </ol>
+    </nav>
+    <h3>Brands available on campus <span class="badge badge-secondary"><?php echo sizeof($venues); ?></span></h3>
+    <br/>
     <ul class="list-group">
         <?php foreach ($venues as $venue) : ?>
             <li class="list-group-item"><?php echo '<a href="/brand/' . urlencode($venue) . '">' . $venue . '</a>' ?></li>
