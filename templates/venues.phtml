@@ -1,10 +1,10 @@
 <?php include "header.phtml"; ?>
 
 <main role="main" class="container">
-    <ul>
-    <?php foreach ($venues as $venue) : ?>
-        <li><?php echo '<a href="/brand/' . urlencode($venue) . '">' . $venue . '</a>' ?></li>
-    <?php endforeach; ?>
+    <ul class="list-group">
+        <?php foreach ($venues as $venue) : ?>
+            <li class="list-group-item"><?php echo '<a href="/brand/' . urlencode($venue) . '">' . $venue . '</a>' ?></li>
+        <?php endforeach; ?>
     </ul>
 </main>
 

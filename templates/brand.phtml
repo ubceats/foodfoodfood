@@ -3,8 +3,13 @@
 <main role="main" class="container">
     <?php if($brand !== null){?>
     <div class="jumbotron">
+        <a class="btn btn-primary  btn-sm float-right"
+           href="<?php echo $brand['url']; ?>"><span class="ion-link"></span>  <?php echo parse_url($brand['url'])['host']; ?></a>
         <h1 class="display-4"><?php echo $brand['name']; ?></h1>
         <p class="lead"><?php echo $brand['desc']; ?></p>
+
+
+
     </div>
 
     <h2>Menu</h2>
