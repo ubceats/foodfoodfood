@@ -71,7 +71,7 @@
         <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
             <?php if (isset($_SESSION["username"])) {
                 ?><li class="nav-item order-2 order-md-1"><span class="navbar-text">Logged in as <b><?php echo $_SESSION["username"]; ?></b>
-                    <?php if (isset($_SESSION["isAdmin"])) { echo " [Admin]"; } ?> <a href="/logout"><button class="btn btn-outline-secondary">Log out</button></a></span></li> <?php
+                    <?php if (isset($_SESSION["isAdmin"])) { echo " <i class=\"ion-flash text-warning\"></i>"; } ?> <a href="/logout"><button class="btn btn-outline-secondary">Log out</button></a></span></li> <?php
             } else { ?><li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
             <li class="dropdown order-1">
                 <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
