@@ -1,0 +1,43 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+
+    <h2>Associate a food item with a category</h2>
+
+    <form method="get" action="/assocfooditemcategory">
+        <?php
+        if ($didInsert) {
+            if (is_null($error)) { ?>
+            <div class="alert alert-success" role="alert">
+                <p>The new association between <code><?php echo $lastCategoryName; ?></code> and <code><?php echo $lastFoodItemName; ?></code> was successfully pushed to the database.</p>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, but the food item - category association failed. MySQL returned the following error when inserting:</p>
+                <code><?php echo $error; ?></code>
+            </div>
+            <?php }
+            } ?>
+
+        <div class="form-group">
+            <label for="fooditem">Food item <*>...</label>
+            <select class="form-control" id="fooditem" name="fooditem">
+                <?php foreach ($foodItemsList as $fooditem) {
+                    echo "<option>".$fooditem["name"]." | ". $fooditem["brandName"] ."</option>";
+                } ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="category">... has category <*></label>
+            <select class="form-control" id="category" name="category">
+                <?php foreach ($categoriesList as $category) {
+                    echo "<option>".$category["name"]."</option>";
+                } ?>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Insert into database</button>
+    </form>
+
+</main>
+
+<?php include "footer.phtml"; ?>

@@ -23,3 +23,4 @@ $app->get('/assocbrandloc', \ubceats\routes\AssociateBrandLocation::class);
 $app->get('/addfooditem', \ubceats\routes\AddFoodItem::class);
 $app->get('/rmlocation', \ubceats\routes\RemoveLocation::class);
 $app->get('/rmbrand', \ubceats\routes\RemoveBrand::class);
+$app->get('/assocfooditemcategory', \ubceats\routes\AssociateFoodItemCategory::class);
