@@ -8,13 +8,13 @@
     <ul class="list-group">
         <?php foreach ($menu as $item): ?>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <a href="/brand/<? echo urlencode($brand) ?>/<? echo urlencode($item["name"]) ?>"><? echo $item["name"] ?></a>
+            <a href="/brand/<?php echo urlencode($brand) ?>/<?php echo urlencode($item["name"]) ?>"><?php echo $item["name"] ?></a>
             <div class="align-ri">
-                <span class="badge badge-primary badge-pill">$<? echo $item["price"] ?></span>
-                <span class="badge badge-warning badge-pill"><? echo ($item["total"] == null ? "N/A" : $item["total"]) ?></span>
+                <span class="badge badge-primary badge-pill">$<?php echo $item["price"] ?></span>
+                <span class="badge badge-warning badge-pill"><?php echo ($item["total"] == null ? "N/A" : $item["total"]) ?></span>
             </div>
         </li>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </ul>
 
 
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <? endforeach; ?>
+    <?php endforeach; ?>
     </div>
 </main>
 
