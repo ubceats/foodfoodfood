@@ -9,18 +9,13 @@ use ubceats\db\VoteQuery;
 class Vote extends GenericRoute
 {
     public function __invoke(Request $request, Response $response, array $args) {
+        $body = $request->getParsedBody();
 
-        if($args["direction"] === "up") {
-            (new VoteQuery($args["foodItemId"], true))();
-            $this->container->get('logger')->info("ubceats '/' vote up");
-        } else {
-            (new VoteQuery($args["foodItemId"], false))();
-            $this->container->get('logger')->info("ubceats '/' vote down");
-        }
+        $this->container->get('logger')->info("ubceats '/' vote");
 
-        // Sample log message
+        $res = (new VoteQuery($body["brandName"], $body["foodItemName"], $body["isUpvote"], $body["review"]))();
 
-        // Render index view
-        return "{}";
+        header("Location: " . $_SERVER["HTTP_REFERER"] . "?error=" . $res);
+        exit();
     }
 }

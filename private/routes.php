@@ -7,7 +7,7 @@ $app->get('/about', \ubceats\routes\AboutThis::class);
 $app->get('/costs', \ubceats\routes\CostInfo::class);
 $app->get('/list', \ubceats\routes\AllVenues::class);
 $app->get('/search/{thing}', \ubceats\routes\Search::class);
-$app->get('/vote/{foodItemId}/{direction}', \ubceats\routes\Vote::class);
+$app->post('/vote', \ubceats\routes\Vote::class);
 
 
 $app->get('/brand/{name}', \ubceats\routes\Brand::class);
