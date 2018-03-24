@@ -15,6 +15,14 @@
 
         </div>
     </form>
+
+    <div class="card">
+        <div class="card-body">
+            The most expensive restaurant is <a href="/brand/<?php echo $price["max"]["brandName"] ?>"><?php echo $price["max"]["brandName"] ?></a>. The average price of an item there is <mark><?php echo $price["max"]["price"] ?></mark>.
+
+            The least expensive restaurant is <a href="/brand/<?php echo $price["min"]["brandName"] ?>"><?php echo $price["min"]["brandName"] ?></a>. The average price of an item there is <mark><?php echo $price["min"]["price"] ?></mark>.
+        </div>
+    </div>
 </main>
 
 <?php include "footer.phtml"; ?>
