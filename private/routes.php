@@ -9,7 +9,6 @@ $app->get('/list', \ubceats\routes\AllVenues::class);
 $app->get('/search/{thing}', \ubceats\routes\Search::class);
 $app->get('/vote/{foodItemId}/{direction}', \ubceats\routes\Vote::class);
 
-
 $app->get('/brand/{name}', \ubceats\routes\Brand::class);
 $app->get('/brand/{brand}/{item}', \ubceats\routes\FoodItem::class);
 
@@ -22,3 +21,5 @@ $app->get('/addbrand', \ubceats\routes\AddBrand::class);
 $app->get('/addlocation', \ubceats\routes\AddLocation::class);
 $app->get('/assocbrandloc', \ubceats\routes\AssociateBrandLocation::class);
 $app->get('/addfooditem', \ubceats\routes\AddFoodItem::class);
+$app->get('/rmlocation', \ubceats\routes\RemoveLocation::class);
+$app->get('/rmbrand', \ubceats\routes\RemoveBrand::class);
