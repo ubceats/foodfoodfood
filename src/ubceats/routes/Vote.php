@@ -15,7 +15,8 @@ class Vote extends GenericRoute
 
         $res = (new VoteQuery($body["brandName"], $body["foodItemName"], $body["isUpvote"], $body["review"]))();
 
-        header("Location: " . $_SERVER["HTTP_REFERER"] . "?error=" . $res);
+
+        header("Location: " . $_SERVER["HTTP_REFERER"] . "?error=" . (!$res ? 'true' : 'false'));
         exit();
     }
 }
