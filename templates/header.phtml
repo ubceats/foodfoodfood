@@ -95,6 +95,19 @@
     </div>
 </nav>
 
+<div class="container">
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-md-10">
+
+        </div>
+        <div class="col-md-2">
+        <a class="btn btn-outline-info btn-block btn-sm" data-toggle="collapse" href="#queryCollapse" role="button" aria-expanded="false" aria-controls="queryCollapse">
+            Queries <span class="badge badge-light"><?php echo sizeof($GLOBALS["mysqlLogs"]); ?> </span>
+        </a>
+        </div>
+    </div>
+</div>
+<div class="collapse" id="queryCollapse">
 <?php
 echo "<small>";
 echo "<main role=\"main\" class=\"container\"><code><b>".sizeof($GLOBALS["mysqlLogs"]) . (sizeof($GLOBALS["mysqlLogs"]) === 1  ? " query was" : " queries were") . " run to generate this page.</b></code></main>";
@@ -103,3 +116,4 @@ foreach ($GLOBALS["mysqlLogs"] as $item){
 }
 echo "</small><br/>";
 ?>
+</div>
