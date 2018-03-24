@@ -19,15 +19,8 @@ class GetCategory extends DbQuery
 
     public function runQuery()
     {
-        $date = date('w');
-        if($date == 0){
-            $date = 7;
-        }
 
-        $q = $this->query("");
-        if(is_bool($q)){
-            return $q;
-        }
+        $q = $this->query("SELECT * FROM categories;");
 
 
         $arr = [];
