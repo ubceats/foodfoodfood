@@ -16,62 +16,14 @@ function doSearchRefine(e) {
         return;
     }
 
-    var sort = document.getElementById('sortOptions').value;
 
-    url = '/search/' + document.getElementById('filter-page-search').value + '?sort=' + sort;
-    if(document.getElementById('veggieCheck').checked){
-        url += "&vegetarian=true";
-    }
-    if(document.getElementById('veganCheck').checked){
-        url += "&vegan=true";
-    }
-    if(document.getElementById('gfCheck').checked){
-        url += "&gluten_free=true";
-
-    }
-    if(document.getElementById('mealPlanCheck').checked){
-        url += "&mealPlan=true";
-    }
-    if(document.getElementById('flexDollarsCheck').checked){
-        url += "&flexDollars=true";
-    }
-
-    if(sort === "1"){
-        getLocation();
-    }
-    else{
-        window.location.href = url; //relative to domain
-        url = null;
-    }
-}
-
-function getLocation()
-{
-    if( navigator.geolocation )
-    {
-        // Call getCurrentPosition with success and failure callbacks
-        navigator.geolocation.getCurrentPosition( gotLocation, failedLocation );
-    }
-    else
-    {
-        alert("Sorry, your browser does not support geolocation services.");
-    }
-}
-
-function gotLocation(position)
-{
-
-    url += "&lat=" + position.coords.latitude;
-    url += "&lon=" + position.coords.longitude;
-
+    url = '/search/' + document.getElementById('filter-page-search').value;
     window.location.href = url; //relative to domain
     url = null;
 }
 
-function failedLocation()
-{
-    alert("Can't locate you. Try using another sort?");
-}
+
+
 
 if(document.getElementById('searchForm')) {
     document.getElementById('searchForm').addEventListener('submit', doSearchMain, false);
@@ -79,14 +31,4 @@ if(document.getElementById('searchForm')) {
 
 if(document.getElementById('refineSearchForm')) {
     document.getElementById('refineSearchForm').addEventListener('submit', doSearchRefine, false);
-}
-
-function voteUp(id) {
-    $.get('/vote/' + id + '/up',function(data){ console.log(data) });
-    document.getElementById('rating' + id).innerHTML++;
-
-}
-function voteDown(id) {
-    $.get('/vote/' + id + '/down',function(data){ console.log(data) });
-    document.getElementById('rating' + id).innerHTML--;
 }

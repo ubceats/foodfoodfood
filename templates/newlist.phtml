@@ -1,0 +1,51 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+    <form id="refineSearchForm">
+        <div class="form-group">
+            <input type="text" class="form-control form-control-lg" id="filter-page-search"
+                   aria-describedby="search-term"
+                   placeholder="Look up any food item at UBC... " <?php if (isset($thing)) echo "value=\"$thing\""; ?> />
+            <small id="search-help" class="form-text text-muted">
+                Try searching for
+                <mark><a href="/search/pizza">pizza</a></mark>
+                or
+                <mark><a href="/search/burger">burger</a></mark>
+                .
+            </small>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="<?php echo (count($stuff["food"]) === 0 ? "col-md-12" : "col-md-6") ?>">
+
+            <ul class="list-group">
+                <?php if(count($stuff["brands"]) > 0): ?>
+                    <a href="#" class="list-group-item list-group-item-action active">
+                        Brands
+                    </a>
+                <?php endif; ?>
+                <?php foreach ($stuff["brands"] as $brand) : ?>
+                    <li class="list-group-item"><?php echo '<a href="/brand/' . urlencode($brand["name"]) . '">' . $brand["name"] . '</a>' ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <div class="<?php echo (count($stuff["brands"]) === 0 ? "col-md-12" : "col-md-6") ?>">
+            <ul class="list-group">
+                <?php if(count($stuff["food"]) > 0): ?>
+                    <a href="#" class="list-group-item list-group-item-action active">
+                        Food
+                    </a>
+                <?php endif; ?>
+
+                <?php foreach ($stuff["food"] as $foodItem) : ?>
+                    <li class="list-group-item"><?php echo '<a href="/brand/' . urlencode($foodItem["brandName"]) . '/' . urlencode($foodItem["name"]) . '">' . $foodItem["name"] . '</a>' ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+
+
+</main>
+
+<?php include "footer.phtml"; ?>
