@@ -23,7 +23,7 @@ class CatDivQuery extends DbQuery{
     public function runQuery(){
         $str = "";
         foreach ($this->cats as $cat){
-            $str .= "C.name = '$cat'' OR ";
+            $str .= "C.name = '$cat' OR ";
         }
 
 

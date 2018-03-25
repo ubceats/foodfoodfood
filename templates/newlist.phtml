@@ -30,6 +30,7 @@
                 <?php endforeach; ?>
             </ul>
         </div>
+
         <div class="<?php echo (count($stuff["brands"]) === 0 ? "col-md-12" : "col-md-6") ?>">
             <ul class="list-group">
                 <?php if(count($stuff["food"]) > 0): ?>
@@ -43,6 +44,17 @@
                 <?php endforeach; ?>
             </ul>
         </div>
+
+        <div class="col-md-12">
+            <ul class="list-group" >
+                <?php if(count($stuff["brands"]) == 0 && count($stuff["food"]) == 0): ?>
+                    <a class="list-group-item list-group-item-danger">
+                        There are no results matching your query. Please try again.
+                    </a>
+                <?php endif; ?>
+            </ul>
+        </div>
+
     </div>
 
 
