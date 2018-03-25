@@ -10,14 +10,16 @@ namespace ubceats\db;
 class GetItemsForBrand extends DbQuery
 {
     private $name;
+    private $order;
 
     /**
      * GetItemsForBrand constructor.
      * @param $name
      */
-    public function __construct($name)
+    public function __construct($name, $order = "DESC")
     {
         $this->name = $name;
+        $this->order = $order;
     }
 
 
@@ -28,10 +30,10 @@ class GetItemsForBrand extends DbQuery
             $date = 7;
         }
 
-        $q = $this->query("SELECT name, f.brandName, price, total FROM food_items f
+        $q = $this->query("SELECT name, f.brandName, price, ROUND(total) AS total FROM food_items f
 LEFT JOIN
-  (SELECT SUM(v.isUpvote) AS total, v.brandName, foodItemName FROM votes v GROUP BY brandName, foodItemName) AS T ON T.brandName =  f.brandName AND T.foodItemName = f.name
-WHERE f.brandName = '{$this->getDb()->escape_string($this->name)}' ORDER BY total DESC;");
+  (SELECT (((AVG(isUpvote)*100)+100)/2) AS total, v.brandName, foodItemName FROM votes v GROUP BY brandName, foodItemName) AS T ON T.brandName =  f.brandName AND T.foodItemName = f.name
+WHERE f.brandName = '{$this->getDb()->escape_string($this->name)}' ORDER BY total {$this->getDb()->escape_string($this->order)};");
 
 
 

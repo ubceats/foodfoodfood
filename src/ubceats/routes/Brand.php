@@ -20,7 +20,7 @@ class Brand extends GenericRoute
         return $this->container->get('renderer')->render($response, 'brand.phtml', [
             "brand" => (new GetBrand($args['name']))(),
             "locations" => (new GetLocationsForBrand($args['name']))(),
-            "menu" => (new GetItemsForBrand($args['name']))()
+            "menu" => (new GetItemsForBrand($args['name'], ($request->getParam("sort") ? $request->getParam("sort") : 'DESC')))()
         ]);
     }
 }
