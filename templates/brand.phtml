@@ -35,7 +35,7 @@
             <a href="/brand/<?php echo urlencode($brand['name']) ?>/<?php echo urlencode($item["name"]) ?>"><?php echo $item["name"] ?></a>
             <div class="align-ri">
                 <span class="badge badge-primary">$<?php echo number_format((float)$item["price"], 2, '.', ''); ?></span>
-                <span class="badge badge-warning"><?php echo($item["total"] == null ? "N/A" : $item["total"] . '%') ?></span>
+                <span class="badge <?php echo ($item["total"] > 75 ? 'badge-success' : ($item["total"] > 50 ? 'badge-warning' : 'badge-danger')) ?>"><?php echo($item["total"] == null ? "N/A" : $item["total"] . '%') ?></span>
             </div>
         </li>
         <?php endforeach; ?>
