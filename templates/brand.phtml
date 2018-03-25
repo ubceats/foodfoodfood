@@ -42,8 +42,8 @@
     </ul>
         <?php if (sizeof($menu) == 0) { ?>
             <div class="alert alert-warning" role="alert">
-                <b>Sad!</b> This brand has no food items in the database. How about <a href="/addfooditem">adding
-                    one</a> now?
+                <b>Sad!</b> This brand has no food items in the database. <?php if(isset($_SESSION['isAdmin'])): ?>How about <a href="/addfooditem">adding
+                    one</a> now?<?php endif;?>
             </div>
         <?php } ?>
         <br/>
@@ -72,8 +72,8 @@
     </div>
             <?php if (sizeof($locations) == 0) { ?>
                 <div class="alert alert-warning" role="alert">
-                    <b>Sad!</b> This brand has no locations in the database. How about <a href="/addlocation">adding
-                        one</a> now?
+                    <b>Sad!</b> This brand has no locations in the database. <?php if(isset($_SESSION['isAdmin'])): ?>How about <a href="/addlocation">adding
+                        one</a> now?<?php endif;?>
                 </div>
             <?php } ?>
     </div>
