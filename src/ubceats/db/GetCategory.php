@@ -9,7 +9,6 @@ class GetCategory extends DbQuery
 
     /**
      * GetCategory constructor.
-     * @param $name
      */
     public function __construct()
     {}
