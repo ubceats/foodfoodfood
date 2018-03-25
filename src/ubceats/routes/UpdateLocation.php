@@ -21,14 +21,22 @@ class UpdateLocation extends GenericRoute
             $location = $request->getParam("location");
             $latitude = $request->getParam("latitude");
             $longitude = $request->getParam("longitude");
-            $parts = explode(" | ", $location);
-            $locationName = $parts[0];
-            $locationAddress = $parts[1];
-            $update = new LocationUpdate($locationName, $locationAddress, $latitude, $longitude);
-            $updateResult = $update->updateLocationInDB();
-            if (!$updateResult) {
-                // insertion failed, let's set the error
-                $error = mysqli_error($update->getDb());
+            $locationOK = $longitude >= -123.27 &&
+                $longitude <= -123.22 &&
+                $latitude >= 49.241 &&
+                $latitude <= 49.283;
+            if ($locationOK) {
+                $parts = explode(" | ", $location);
+                $locationName = $parts[0];
+                $locationAddress = $parts[1];
+                $update = new LocationUpdate($locationName, $locationAddress, $latitude, $longitude);
+                $updateResult = $update->updateLocationInDB();
+                if (!$updateResult) {
+                    // insertion failed, let's set the error
+                    $error = mysqli_error($update->getDb());
+                }
+            } else {
+                $error = "CHECK constraint failed. The new location you picked is outside the UBC campus.";
             }
         } else {
             $didUpdate = false;

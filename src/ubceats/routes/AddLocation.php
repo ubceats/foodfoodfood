@@ -4,9 +4,7 @@ namespace ubceats\routes;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use ubceats\db\BrandInsertion;
 use ubceats\db\LocationInsertion;
-use ubceats\db\Sorts\PriceSort;
 
 class AddLocation extends GenericRoute
 {
@@ -21,7 +19,6 @@ class AddLocation extends GenericRoute
             $address = $request->getParam("address");
             $latitude = $request->getParam("latitude");
             $longitude = $request->getParam("longitude");
-            // TODO: add CHECK constraint
             $locationOK = $longitude >= -123.27 &&
                            $longitude <= -123.22 &&
                            $latitude >= 49.241 &&
