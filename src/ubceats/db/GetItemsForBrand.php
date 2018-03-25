@@ -5,7 +5,7 @@ namespace ubceats\db;
 /**
  * Class GetItemsForBrand
  * @package ubceats\db
- * @checklist Join query
+ * @checklist Nested aggregation query
  */
 class GetItemsForBrand extends DbQuery
 {
@@ -15,6 +15,7 @@ class GetItemsForBrand extends DbQuery
     /**
      * GetItemsForBrand constructor.
      * @param $name
+     * @param $order
      */
     public function __construct($name, $order = "DESC")
     {
