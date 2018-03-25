@@ -15,11 +15,8 @@ class Vote extends GenericRoute
         $this->container->get('logger')->info("ubceats '/' vote");
 
         $res = (new VoteQuery($body["brandName"], $body["foodItemName"], $body["isUpvote"], $body["review"]))();
-        var_dump($body);
-        var_dump($res);
-        var_dump(mysqli_error(DbConnection::getInstance()->getMysqli()));
 
-        //header("Location: " . $_SERVER["HTTP_REFERER"] . "?error=" . (!$res ? 'true' : 'false') . "&extra=" . $);
+        header("Location: " . $_SERVER["HTTP_REFERER"] . "?error=" . (!$res ? 'true' : 'false'));
         exit();
     }
 }
