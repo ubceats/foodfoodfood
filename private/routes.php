@@ -27,3 +27,4 @@ $app->get('/rmoccupies', \ubceats\routes\RemoveOccupies::class);
 $app->get('/assocfooditemcategory', \ubceats\routes\AssociateFoodItemCategory::class);
 $app->get('/assocbrandcategory', \ubceats\routes\AssociateBrandCategory::class);
 $app->get('/updatelocation', \ubceats\routes\UpdateLocation::class);
+$app->get('/resetdb', \ubceats\routes\ResetDatabase::class);

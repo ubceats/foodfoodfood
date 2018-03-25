@@ -1,0 +1,35 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+
+    <h2>Reset database</h2>
+
+    <p>Please understand that resetting the database is an permanent action. You are executing on <code><?php echo $hostname ?> / <?php echo $name ?></code>.</p>
+
+    <form method="get" action="/resetdb">
+        <?php
+        if ($didReset) {
+            if (is_null($error)) { ?>
+            <div class="alert alert-success" role="alert">
+                <p>The database was successfully reset to <code><?php echo $backupName; ?></code>.</p>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, but the reset failed. MySQL returned the following error:</p>
+                <code><?php echo $error; ?></code>
+            </div>
+        <?php } } ?>
+        <div class="form-group">
+            <label for="location">Select a backup to restore</label>
+            <select class="form-control" id="files" name="files">
+                <?php foreach ($files as $file) {
+                    echo "<option>".$file."</option>";
+                } ?>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Reset database</button>
+    </form>
+
+</main>
+
+<?php include "footer.phtml"; ?>

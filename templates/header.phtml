@@ -130,6 +130,11 @@
             <a class="btn btn-warning btn-sm" href="/serverinfo.php" role="button">
                 <i class="ion-information-circled"></i> Server information
             </a>
+            <?php if($_SESSION['isAdmin']): ?>
+                <a class="btn btn-danger btn-sm float-right" href="/resetdb" role="button">
+                    <i class="ion-help-buoy"></i> Reset
+                </a>
+            <?php endif; ?>
             <button type="button" class="btn btn-secondary btn-sm disabled"><?php echo ($GLOBALS['dev'] === true ? "dev" : "prod"); ?></button>
         </div>
         </main>
