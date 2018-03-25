@@ -28,7 +28,7 @@ class VoteQuery extends DbQuery
     public function runQuery()
 
     {
-        $result = $this->query("INSERT INTO votes (isUpvote, review, username, foodItemName, brandName) VALUES (" . ($this->isPositive !== "on" ? -1 : 1) . ",'" . $this->getDb()->escape_string($this->rating) . "', '" .  $_SESSION['username'] . "','" . $this->getDb()->escape_string($this->foodItemName) . "', '" . $this->getDb()->escape_string($this->brandName) . "')");
+        $result = $this->query("INSERT INTO votes (isUpvote, review, username, foodItemName, brandName) VALUES (" . ($this->isPositive !== "on" ? -1 : 1) . ",'" . $this->getDb()->escape_string($this->rating) . "', '" .  $this->getDb()->escape_string($_SESSION['username']) . "','" . $this->getDb()->escape_string($this->foodItemName) . "', '" . $this->getDb()->escape_string($this->brandName) . "')");
 
         return !is_bool($result);
 
