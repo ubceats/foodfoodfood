@@ -26,3 +26,4 @@ $app->get('/rmbrand', \ubceats\routes\RemoveBrand::class);
 $app->get('/rmoccupies', \ubceats\routes\RemoveOccupies::class);
 $app->get('/assocfooditemcategory', \ubceats\routes\AssociateFoodItemCategory::class);
 $app->get('/assocbrandcategory', \ubceats\routes\AssociateBrandCategory::class);
+$app->get('/updatelocation', \ubceats\routes\UpdateLocation::class);

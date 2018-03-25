@@ -1,0 +1,51 @@
+<?php include "header.phtml"; ?>
+
+    <main role="main" class="container">
+
+        <h2>Update a location</h2>
+
+        <form method="get" action="/updatelocation">
+            <?php
+            if ($didUpdate) {
+                if (is_null($error)) { ?>
+                    <div class="alert alert-success" role="alert">
+                        <p>Coordinates for the location <code><?php echo $lastName; ?></code> were successfully updated.
+                        </p>
+                    </div>
+                <?php } else { ?>
+                    <div class="alert alert-danger" role="alert">
+                        <p>Sorry, but the location update failed. MySQL returned the following error:</p>
+                        <code><?php echo $error; ?></code>
+                    </div>
+                <?php }
+            } ?>
+            <div class="form-group">
+                <label for="location">Select a location to update</label>
+                <select class="form-control" id="location" name="location">
+                    <?php foreach ($locations as $location) {
+                        echo "<option>" . $location["name"] . " | " . $location["address"] . "</option>";
+                    } ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="latitude">New latitude</label>
+                <input type="text" class="form-control" id="latitude" name="latitude">
+                <small class="form-text text-muted">The latitude of the location, for instance
+                    <mark>46.2354</mark>
+                    .
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="longitude">New longitude</label>
+                <input type="text" class="form-control" id="longitude" name="longitude">
+                <small class="form-text text-muted">The longitude of the location, for instance
+                    <mark>12.4354</mark>
+                    .
+                </small>
+            </div>
+            <button type="submit" class="btn btn-primary">Update row in database</button>
+        </form>
+
+    </main>
+
+<?php include "footer.phtml"; ?>
