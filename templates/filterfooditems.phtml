@@ -1,0 +1,23 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+
+    <h2>Filter food items by category</h2>
+    <p>Select the categories to use as filter: </p>
+    <form method="post" action="/filterfooditems">
+        <div class="form-group">
+    <select name="categories[]" class="custom-select" multiple="multiple">
+        <?php foreach ($categories as $category) { ?>
+        <option value="<?php echo $category["name"];?>"><?php echo $category["name"];?></option>
+        <?php } ?>
+    </select>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Filter food items"/>
+    </form>
+    <h4>Results</h4>
+    <?php foreach ($result as $fooditem) { ?>
+        <li><?php echo $fooditem["name"]; ?></li>
+    <?php } ?>
+</main>
+
+<?php include "footer.phtml"; ?>
