@@ -1,0 +1,35 @@
+<?php include "header.phtml"; ?>
+
+<main role="main" class="container">
+
+    <h2>Remove a brand from a location</h2>
+
+    <p>Note that you must remove all occupies relationships before deleting a brand or location from the DB.</p>
+
+    <form method="get" action="/rmoccupies">
+        <?php
+        if ($didRemove) {
+            if (is_null($error)) { ?>
+            <div class="alert alert-success" role="alert">
+                <p>The brand <code><?php echo $lastName[0]; ?></code> was successfully removed from the location  <code><?php echo $lastName[1]; ?></code> in the database.</p>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-danger" role="alert">
+                <p>Sorry, but the location deletion failed. MySQL returned the following error:</p>
+                <code><?php echo $error; ?></code>
+            </div>
+        <?php } } ?>
+        <div class="form-group">
+            <label for="occupies">Select a occupies to delete</label>
+            <select class="form-control" id="occupies" name="occupies">
+                <?php foreach ($occupies as $occupy) {
+                    echo "<option value =\"{$occupy["brandName"]}|{$occupy["locationName"]}|{$occupy["locationAddress"]}\">{$occupy["brandName"]} | {$occupy["locationName"]}</option>";
+                } ?>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Delete from database</button>
+    </form>
+
+</main>
+
+<?php include "footer.phtml"; ?>

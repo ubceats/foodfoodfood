@@ -2,6 +2,11 @@
 
 namespace ubceats\db;
 
+/**
+ * Class BrandRemoval
+ * @package ubceats\db
+ * @checklist Deletion (cascade)
+ */
 class BrandRemoval extends DbQuery
 {
     private $name;

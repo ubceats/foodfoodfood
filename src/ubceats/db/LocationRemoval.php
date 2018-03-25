@@ -2,6 +2,11 @@
 
 namespace ubceats\db;
 
+/**
+ * Class LocationRemoval
+ * @package ubceats\db
+ * @checklist Deletion (no cascade)
+ */
 class LocationRemoval extends DbQuery
 {
     private $name;
