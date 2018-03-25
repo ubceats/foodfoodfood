@@ -36,12 +36,31 @@ WHERE NOT EXISTS
         WHERE C.name = ih.categoryName
         AND ih.itemName=fi.name));");
 
-        $arr = [];
+        $foodItems = [];
         while ($onerow = $items->fetch_assoc()) {
-            array_push($arr, $onerow);
+            array_push($foodItems, $onerow);
         }
 
-        return $arr;
+        $brands = $this->query("SELECT *
+FROM brand fi
+WHERE NOT EXISTS
+  (SELECT C.name FROM categories C WHERE (" . substr($str, 0, -3) . ") AND NOT EXISTS
+    (SELECT ih.brandName
+        FROM brandHas ih
+        WHERE C.name = ih.categoryName
+        AND ih.brandName=fi.name));");
+
+        $brandsRes = [];
+        while ($onerow = $brands->fetch_assoc()) {
+            array_push($brandsRes, $onerow);
+        }
+
+
+
+        return [
+            "food" => $foodItems,
+            "brands" => $brandsRes
+        ];
 
     }
 

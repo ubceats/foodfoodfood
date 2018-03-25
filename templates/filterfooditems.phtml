@@ -15,9 +15,52 @@
         <input type="submit" class="btn btn-primary" value="Filter food items"/>
     </form>
     <h4>Results</h4>
-    <?php foreach ($result as $fooditem) { ?>
+    <?php foreach ($result ?? [] as $fooditem) { ?>
         <li><?php echo $fooditem["name"]; ?></li>
     <?php } ?>
+
+
+
+    <div class="row">
+        <div class="<?php echo (count($stuff["food"]) === 0 ? "col-md-12" : "col-md-6") ?>">
+
+            <ul class="list-group">
+                <?php if(count($stuff["brands"]) > 0): ?>
+                    <a href="#" class="list-group-item list-group-item-action active">
+                        Brands
+                    </a>
+                <?php endif; ?>
+                <?php foreach ($stuff["brands"] ?? [] as $brand) : ?>
+                    <li class="list-group-item"><?php echo '<a href="/brand/' . urlencode($brand["name"]) . '">' . $brand["name"] . '</a>' ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <div class="<?php echo (count($stuff["brands"]) === 0 ? "col-md-12" : "col-md-6") ?>">
+            <ul class="list-group">
+                <?php if(count($stuff["food"]) > 0): ?>
+                    <a href="#" class="list-group-item list-group-item-action active">
+                        Food
+                    </a>
+                <?php endif; ?>
+
+                <?php foreach ($stuff["food"] ?? [] as $foodItem) : ?>
+                    <li class="list-group-item"><?php echo '<a href="/brand/' . urlencode($foodItem["brandName"]) . '/' . urlencode($foodItem["name"]) . '">' . $foodItem["name"] . '</a>' ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <div class="col-md-12">
+            <ul class="list-group" >
+                <?php if(count($stuff["brands"]) == 0 && count($stuff["food"]) == 0): ?>
+                    <a class="list-group-item list-group-item-danger">
+                        There are no results matching your query. Please try again.
+                    </a>
+                <?php endif; ?>
+            </ul>
+        </div>
+
+    </div>
 </main>
 
 <?php include "footer.phtml"; ?>

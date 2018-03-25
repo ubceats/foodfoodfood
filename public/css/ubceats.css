@@ -11,10 +11,8 @@ body {
 	margin-top: 10px;
 }
 
-.eatsfooter {
-    margin-top: 50px;
+.footer {
     background-color: #f4f3f3;
-    flex: 1;
 }
 
 /* Sticky footer styles
@@ -25,7 +23,7 @@ html {
 }
 
 body {
-    margin-bottom: 60px; /* Margin bottom by footer height */
+    margin-bottom: 70px; /* Margin bottom by footer height */
 }
 
 .footer {

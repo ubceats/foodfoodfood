@@ -24,7 +24,7 @@ class FilterFoodItems extends GenericRoute {
         // Render index view
         return $this->container->get('renderer')->render($response, 'filterfooditems.phtml', [
             "categories" => (new GetCategory())->runQuery(),
-            "result" => $results
+            "stuff" => $results
         ]);
     }
 }
