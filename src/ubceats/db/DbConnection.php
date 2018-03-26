@@ -39,10 +39,12 @@ class DbConnection{
     }
 
     private function connect(){
-        $this->mysqli = new \mysqli($this->host, $this->user, $this->pass, $this->dbName);
+        $this->mysqli = @new \mysqli($this->host, $this->user, $this->pass, $this->dbName);
 
         if ($this->mysqli->connect_errno) {
-            echo "Failed to connect to MySQL: " . $this->mysqli->connect_error;
+            //echo "Failed to connect to MySQL: " . $this->mysqli->connect_error;
+            include_once $GLOBALS['dir'] . 'templates/connerr.phtml';
+            exit(0);
         }
     }
 
