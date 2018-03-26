@@ -1,6 +1,17 @@
 <?php include "header.phtml"; ?>
 
 <main role="main" class="container">
+    <?php if (!$dbSetup): ?>
+        <div class="card mb-3">
+            <div class="card-header bg-info text-white"> <i class="ion-wand"></i> UBCEats setup wizard</div>
+            <div class="card-body">
+                <h5 class="card-title">Your next step is to provision and populate the database</h5>
+                <p>You can populate the database by restoring the database to a provided snapshot</p>.
+
+                <a href="/resetdb" class="btn btn-primary">Populate database</a>
+            </div>
+        </div>
+    <?php endif;?>
     <form id="searchForm">
         <div class="form-group">
             <input type="text" class="form-control form-control-lg" id="search-term" aria-describedby="search-term"

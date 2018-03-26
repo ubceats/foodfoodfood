@@ -4,6 +4,19 @@ namespace ubceats\db;
 
 
 class DbConnection{
+    private static $expectedTables = [
+        'brand',
+        'brandHas',
+        'categories',
+        'food_items',
+        'itemHas',
+        'locations',
+        'occupies',
+        'opening_times',
+        'users',
+        'votes'
+    ];
+
     private static $instance = null;
 
     private $host;
@@ -87,7 +100,33 @@ class DbConnection{
     }
 
     public static function buildFromConfig() : DbConnection{
+        if(!file_exists($GLOBALS['dir']. "db.json")){
+            $configMissing = true;
+            include_once $GLOBALS['dir'] . 'templates/connerr.phtml';
+            exit(0);
+        }
         $arr = json_decode(file_get_contents($GLOBALS['dir']. "db.json"), true);
         return new DbConnection($arr["hostname"], $arr["user"], $arr["password"], $arr["dbName"]);
+    }
+
+    /**
+     * @return array
+     */
+    private function getTables() {
+        $res = $this->getMysqli()->query("SHOW TABLES;");
+
+        $arr = [];
+        while ($onerow = $res->fetch_assoc()) {
+            array_push($arr, reset($onerow));
+        }
+        return $arr;
+    }
+
+    /**
+     * May have false positives :(
+     * @return bool
+     */
+    public function isLikelyStarted(){
+        return count(array_intersect(self::$expectedTables, $this->getTables())) == count(self::$expectedTables);
     }
 }

@@ -40,6 +40,21 @@
 
 
 <main role="main" class="container">
+    <?php if (isset($configMissing)): ?>
+        <div class="card mb-3">
+            <div class="card-header bg-info text-white"> <i class="ion-wand"></i> UBCEats setup wizard</div>
+            <div class="card-body">
+                <h5 class="card-title">Your next step is creating a db.json file</h5>
+                <p>Create this file in the main directory of the project. It will tell UBCEats how to connect to your database. Once you make this file, just reload the page and a connection will be attempted. The file should be of the format</p>
+                <pre><code class="json">{
+   "hostname": "hostname here",
+   "user": "username here",
+   "password": "password here",
+   "dbName": "database name here"
+}</code></pre>
+            </div>
+        </div>
+    <?php endif;?>
 
     <div class="card mb-3">
         <div class="card-header bg-danger text-white"> Error!</div>
