@@ -16,14 +16,16 @@ class ListBrands extends DbQuery
      * a <b>mysqli_result</b> object.For other successful queries <b>mysqli_query</b> will
      * return true and false on failure.
      */
-    public function getBrandsNamesList() {
+    public function getBrandsNamesList()
+    {
         $result = $this->query("SELECT name FROM brand;");
         return $result;
     }
 
 
-    public function runQuery() {
-        // FUCK THIS SHIT!!!
+    public function runQuery()
+    {
+        // TODO
     }
 
 }

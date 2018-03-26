@@ -11,7 +11,8 @@ class GetCategory extends DbQuery
      * GetCategory constructor.
      */
     public function __construct()
-    {}
+    {
+    }
 
 
     public function runQuery()

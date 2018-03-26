@@ -21,9 +21,10 @@ class BrandLocationAssociation extends DbQuery
      * a <b>mysqli_result</b> object.For other successful queries <b>mysqli_query</b> will
      * return true and false on failure.
      */
-    public function pushAssociationToDB() {
+    public function pushAssociationToDB()
+    {
         $result = $this->query("INSERT INTO occupies (brandName, locationName, locationAddress)
-                      VALUES ('".$this->brandName."', '".$this->locationName."', '".$this->locationAddress."');");
+                      VALUES ('" . $this->brandName . "', '" . $this->locationName . "', '" . $this->locationAddress . "');");
         return $result;
     }
 
@@ -32,7 +33,6 @@ class BrandLocationAssociation extends DbQuery
     {
         // FUCK THIS SHIT!!!
     }
-
 
 
 }

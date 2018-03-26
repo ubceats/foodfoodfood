@@ -3,7 +3,8 @@
 namespace ubceats\db;
 
 
-class DbConnection{
+class DbConnection
+{
     private static $expectedTables = [
         'brand',
         'brandHas',
@@ -26,7 +27,8 @@ class DbConnection{
 
     private $mysqli;
 
-    public static function getInstance() : DbConnection{
+    public static function getInstance(): DbConnection
+    {
         if (!isset(static::$instance)) {
             static::$instance = self::buildFromConfig();
         }
@@ -51,7 +53,8 @@ class DbConnection{
 
     }
 
-    private function connect(){
+    private function connect()
+    {
         $this->mysqli = @new \mysqli($this->host, $this->user, $this->pass, $this->dbName);
 
         if ($this->mysqli->connect_errno) {
@@ -64,7 +67,8 @@ class DbConnection{
     /**
      * @return mixed
      */
-    public function getMysqli(){
+    public function getMysqli()
+    {
         return $this->mysqli;
     }
 
@@ -93,26 +97,30 @@ class DbConnection{
     }
 
 
-    protected function __wakeup(){
+    protected function __wakeup()
+    {
     }
 
-    protected function __clone(){
+    protected function __clone()
+    {
     }
 
-    public static function buildFromConfig() : DbConnection{
-        if(!file_exists($GLOBALS['dir']. "db.json")){
+    public static function buildFromConfig(): DbConnection
+    {
+        if (!file_exists($GLOBALS['dir'] . "db.json")) {
             $configMissing = true;
             include_once $GLOBALS['dir'] . 'templates/connerr.phtml';
             exit(0);
         }
-        $arr = json_decode(file_get_contents($GLOBALS['dir']. "db.json"), true);
+        $arr = json_decode(file_get_contents($GLOBALS['dir'] . "db.json"), true);
         return new DbConnection($arr["hostname"], $arr["user"], $arr["password"], $arr["dbName"]);
     }
 
     /**
      * @return array
      */
-    private function getTables() {
+    private function getTables()
+    {
         $res = $this->getMysqli()->query("SHOW TABLES;");
 
         $arr = [];
@@ -126,7 +134,8 @@ class DbConnection{
      * May have false positives :(
      * @return bool
      */
-    public function isLikelyStarted(){
+    public function isLikelyStarted()
+    {
         return count(array_intersect(self::$expectedTables, $this->getTables())) == count(self::$expectedTables);
     }
 }

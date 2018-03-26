@@ -11,7 +11,8 @@ class BrandRemoval extends DbQuery
 {
     private $name;
 
-    public function __construct(string $name) {
+    public function __construct(string $name)
+    {
         $this->name = $name;
     }
 
@@ -21,12 +22,14 @@ class BrandRemoval extends DbQuery
      * a <b>mysqli_result</b> object. For other successful queries <b>mysqli_query</b> will
      * return true and false on failure.
      */
-    public function removeBrandFromDB() {
-        $result = $this->query("DELETE FROM brand WHERE name = '".$this->name."';");
+    public function removeBrandFromDB()
+    {
+        $result = $this->query("DELETE FROM brand WHERE name = '" . $this->name . "';");
         return $result;
     }
 
-    public function runQuery() {
+    public function runQuery()
+    {
         // FUCK THIS SHIT!!!
     }
 

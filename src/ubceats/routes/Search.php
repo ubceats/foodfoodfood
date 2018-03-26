@@ -8,7 +8,8 @@ use ubceats\db\NewFoodSearch;
 
 class Search extends GenericRoute
 {
-    public function __invoke(Request $request, Response $response, array $args) {
+    public function __invoke(Request $request, Response $response, array $args)
+    {
         // Sample log message
         $this->container->get('logger')->info("ubceats '/' search");
 

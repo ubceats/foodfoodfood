@@ -23,7 +23,7 @@ class ListLocations extends DbQuery
 
 
     public function runQuery() {
-        // FUCK THIS SHIT!!!
+        // TODO
     }
 
 }

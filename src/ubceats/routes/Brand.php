@@ -12,7 +12,8 @@ use ubceats\db\GetLocationsForBrand;
 
 class Brand extends GenericRoute
 {
-    public function __invoke(Request $request, Response $response, array $args) {
+    public function __invoke(Request $request, Response $response, array $args)
+    {
         // Sample log message
         $this->container->get('logger')->info("ubceats '/' brand info");
 

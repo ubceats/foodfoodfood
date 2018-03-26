@@ -27,7 +27,7 @@ class GetItemsForBrand extends DbQuery
     public function runQuery()
     {
         $date = date('w');
-        if($date == 0){
+        if ($date == 0) {
             $date = 7;
         }
 
@@ -37,8 +37,7 @@ LEFT JOIN
 WHERE f.brandName = '{$this->getDb()->escape_string($this->name)}' ORDER BY total {$this->getDb()->escape_string($this->order)};");
 
 
-
-        if(is_bool($q)){
+        if (is_bool($q)) {
             return mysqli_error($this->getDb());
 
         }

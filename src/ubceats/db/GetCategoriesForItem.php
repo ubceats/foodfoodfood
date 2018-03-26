@@ -1,4 +1,5 @@
 <?php
+
 namespace ubceats\db;
 
 /**
@@ -6,7 +7,8 @@ namespace ubceats\db;
  * @package ubceats\db
  * @checklist Selection query
  */
-class GetCategoriesForItem extends DbQuery{
+class GetCategoriesForItem extends DbQuery
+{
 
     private $itemName;
     private $brandName;
@@ -16,13 +18,15 @@ class GetCategoriesForItem extends DbQuery{
      * @param $itemName
      * @param $brandName
      */
-    public function __construct($itemName, $brandName){
+    public function __construct($itemName, $brandName)
+    {
         $this->itemName = $itemName;
         $this->brandName = $brandName;
     }
 
 
-    public function runQuery(){
+    public function runQuery()
+    {
 
         $cats = $this->query("SELECT categoryName, c.desc FROM itemHas INNER JOIN categories c ON itemHas.categoryName = c.name
 WHERE brandName = '{$this->getDb()->escape_string($this->brandName)}' AND itemName = '{$this->getDb()->escape_string($this->itemName)}'");

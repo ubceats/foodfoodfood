@@ -14,7 +14,8 @@ use ubceats\util\LatLon;
  * @package ubceats\db
  * @checklist DEPRECATED QUERY
  */
-class FoodSearch extends DbQuery {
+class FoodSearch extends DbQuery
+{
 
     static $VENUE_FILTERS = ['mealPlan', 'flexDollars'];
 
@@ -34,17 +35,19 @@ class FoodSearch extends DbQuery {
      * @param $sort
      * @param $userLoc
      */
-    public function __construct(string $search, array $filters, int $sort){
+    public function __construct(string $search, array $filters, int $sort)
+    {
         $this->search = $search;
         $this->filters = $filters;
         $this->sort = $sort;
     }
 
-    private function groupVenues($arr) : array {
+    private function groupVenues($arr): array
+    {
         $venues = [];
 
-        foreach ($arr as $foodItem){
-            if(!isset($venues[$foodItem['brandName'] . $foodItem['locationName'] . $foodItem['locationAddress']])){
+        foreach ($arr as $foodItem) {
+            if (!isset($venues[$foodItem['brandName'] . $foodItem['locationName'] . $foodItem['locationAddress']])) {
                 $venues[$foodItem['brandName'] . $foodItem['locationName'] . $foodItem['locationAddress']] = [
                     "food_items" => [],
                     "locations" => [],
@@ -56,26 +59,26 @@ class FoodSearch extends DbQuery {
                     "lon" => $foodItem['longitude'],
                     "name" => $foodItem['brandName'],
                     "description" => $foodItem['desc'],
-                    "opensAt" => ($foodItem['opensAt'] < 1000 &&  $foodItem['opensAt'] != -1 ? "0" . $foodItem['opensAt'] : $foodItem['opensAt']),
-                    "closesAt" => ($foodItem['closesAt'] < 1000 && $foodItem['closesAt'] != -1? "0" . $foodItem['closesAt'] : $foodItem['closesAt']),
+                    "opensAt" => ($foodItem['opensAt'] < 1000 && $foodItem['opensAt'] != -1 ? "0" . $foodItem['opensAt'] : $foodItem['opensAt']),
+                    "closesAt" => ($foodItem['closesAt'] < 1000 && $foodItem['closesAt'] != -1 ? "0" . $foodItem['closesAt'] : $foodItem['closesAt']),
                     "venue_id" => str_replace(' ', '', $foodItem['brandName'] . $foodItem['locationName'] . $foodItem['locationAddress'])
                 ];
             }
 
 
             $venues[$foodItem['brandName'] . $foodItem['locationName'] . $foodItem['locationAddress']]["food_items"][] = [
-               "price" => $foodItem['price'],
-               "item_name" => ucwords(strtolower($foodItem['foodName'])),
-               "rating" => $foodItem['rating'],
+                "price" => $foodItem['price'],
+                "item_name" => ucwords(strtolower($foodItem['foodName'])),
+                "rating" => $foodItem['rating'],
                 "gluten_free" => $foodItem['gluten_free'],
-                "vegan" =>  $foodItem['vegan'],
+                "vegan" => $foodItem['vegan'],
                 "vegetarian" => $foodItem['vegetarian']
             ];
 
         }
 
-        foreach ($venues as &$venue){
-            foreach ($venue['food_items'] as &$item){
+        foreach ($venues as &$venue) {
+            foreach ($venue['food_items'] as &$item) {
                 $venue['rating'] += $item['rating'];
                 $venue['price'] += $item['price'];
             }
@@ -87,16 +90,16 @@ class FoodSearch extends DbQuery {
     }
 
 
-    private function runSort($arr) : array {
-        switch ($this->sort){
+    private function runSort($arr): array
+    {
+        switch ($this->sort) {
             case self::RATING_SORT:
                 return RatingSort::sort($arr);
                 break;
             case self::DISTANCE_SORT:
-                if(isset($this->userLoc)){
+                if (isset($this->userLoc)) {
                     return DistanceSort::sort($arr, $this->userLoc);
-                }
-                else{
+                } else {
                     return $arr;
                 }
                 break;
@@ -104,7 +107,7 @@ class FoodSearch extends DbQuery {
                 return PriceSort::sort($arr);
                 break;
         }
-        
+
         return $arr;
     }
 
@@ -112,7 +115,7 @@ class FoodSearch extends DbQuery {
     public function runQuery()
     {
         $date = date('w');
-        if($date == 0){
+        if ($date == 0) {
             $date = 7;
         }
 

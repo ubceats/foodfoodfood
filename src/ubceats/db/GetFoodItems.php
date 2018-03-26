@@ -12,7 +12,8 @@ class GetFoodItems extends DbQuery
      * @param $name
      */
     public function __construct()
-    {}
+    {
+    }
 
 
     public function runQuery()

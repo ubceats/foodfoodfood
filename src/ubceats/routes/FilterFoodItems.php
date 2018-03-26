@@ -12,12 +12,14 @@ use ubceats\db\GetCategory;
 use ubceats\db\GetItemsForBrand;
 use ubceats\db\GetLocationsForBrand;
 
-class FilterFoodItems extends GenericRoute {
-    public function __invoke(Request $request, Response $response, array $args) {
+class FilterFoodItems extends GenericRoute
+{
+    public function __invoke(Request $request, Response $response, array $args)
+    {
         // Sample log message
         $this->container->get('logger')->info("ubceats '/' filter food items");
         $results = null;
-        if ($request->getParams()["categories"]) {
+        if (isset($request->getParams()["categories"])) {
             $catDivQuery = new CatDivQuery($request->getParams()["categories"]);
             $results = $catDivQuery->runQuery();
         }

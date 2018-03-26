@@ -7,7 +7,8 @@ namespace ubceats\db;
  * @package ubceats\db
  * @checklist Selection query
  */
-class VenueList extends DbQuery {
+class VenueList extends DbQuery
+{
     public function runQuery()
     {
         $arr = [];

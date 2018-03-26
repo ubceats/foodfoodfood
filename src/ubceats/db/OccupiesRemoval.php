@@ -13,7 +13,8 @@ class OccupiesRemoval extends DbQuery
     private $locationName;
     private $locationAddress;
 
-    public function __construct(string $brandName, string $locationName, string $locationAddress) {
+    public function __construct(string $brandName, string $locationName, string $locationAddress)
+    {
         $this->brandName = $brandName;
         $this->locationName = $locationName;
         $this->locationAddress = $locationAddress;
@@ -25,13 +26,15 @@ class OccupiesRemoval extends DbQuery
      * a <b>mysqli_result</b> object. For other successful queries <b>mysqli_query</b> will
      * return true and false on failure.
      */
-    public function removeOccupiesFromDB() {
+    public function removeOccupiesFromDB()
+    {
         $result = $this->query("DELETE FROM occupies WHERE brandName = '{$this->getDb()->escape_string($this->brandName)}' AND locationName = '{$this->getDb()->escape_string($this->locationName)}' AND locationAddress = '{$this->getDb()->escape_string($this->locationAddress)}';");
         return $result;
     }
 
-    public function runQuery() {
-        // FUCK THIS SHIT!!!
+    public function runQuery()
+    {
+        // TODO
     }
 
 }

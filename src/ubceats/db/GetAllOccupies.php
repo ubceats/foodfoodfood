@@ -11,7 +11,8 @@ class GetAllOccupies extends DbQuery
      * GetAllOccupies constructors
      */
     public function __construct()
-    {}
+    {
+    }
 
 
     public function runQuery()

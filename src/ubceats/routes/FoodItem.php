@@ -14,7 +14,8 @@ use ubceats\db\GetReviewsForItem;
 
 class FoodItem extends GenericRoute
 {
-    public function __invoke(Request $request, Response $response, array $args) {
+    public function __invoke(Request $request, Response $response, array $args)
+    {
         // Sample log message
         $this->container->get('logger')->info("ubceats '/' brand info");
 

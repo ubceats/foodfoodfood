@@ -1,4 +1,5 @@
 <?php
+
 namespace ubceats\db;
 
 /**
@@ -6,7 +7,8 @@ namespace ubceats\db;
  * @package ubceats\db
  * @checklist Aggregation query
  */
-class GetReviewsForItem extends DbQuery{
+class GetReviewsForItem extends DbQuery
+{
 
     private $itemName;
     private $brandName;
@@ -16,13 +18,15 @@ class GetReviewsForItem extends DbQuery{
      * @param $itemName
      * @param $brandName
      */
-    public function __construct($itemName, $brandName){
+    public function __construct($itemName, $brandName)
+    {
         $this->itemName = $itemName;
         $this->brandName = $brandName;
     }
 
 
-    public function runQuery(){
+    public function runQuery()
+    {
         $avg = $this->query("SELECT (((AVG(isUpvote)*100)+100)/2) AS avg FROM votes WHERE brandName = '{$this->getDb()->escape_string($this->brandName)}' AND foodItemName = '{$this->getDb()->escape_string($this->itemName)}'");
 
         $avg = $avg->fetch_assoc();

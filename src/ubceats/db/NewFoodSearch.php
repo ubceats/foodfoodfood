@@ -14,7 +14,8 @@ use ubceats\util\LatLon;
  * @package ubceats\db
  * @checklist Selection query
  */
-class NewFoodSearch extends DbQuery {
+class NewFoodSearch extends DbQuery
+{
 
     private $search;
 
@@ -23,7 +24,8 @@ class NewFoodSearch extends DbQuery {
      * FoodSearch constructor.
      * @param $search
      */
-    public function __construct(string $search){
+    public function __construct(string $search)
+    {
         $this->search = $search;
     }
 

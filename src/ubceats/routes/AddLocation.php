@@ -8,7 +8,8 @@ use ubceats\db\LocationInsertion;
 
 class AddLocation extends GenericRoute
 {
-    public function __invoke(Request $request, Response $response, array $args) {
+    public function __invoke(Request $request, Response $response, array $args)
+    {
         // Log the page load.
         $this->container->get('logger')->info("ubceats '/' add location");
         $error = null;
@@ -20,9 +21,9 @@ class AddLocation extends GenericRoute
             $latitude = $request->getParam("latitude");
             $longitude = $request->getParam("longitude");
             $locationOK = $longitude >= -123.27 &&
-                           $longitude <= -123.22 &&
-                           $latitude >= 49.241 &&
-                           $latitude <= 49.283;
+                $longitude <= -123.22 &&
+                $latitude >= 49.241 &&
+                $latitude <= 49.283;
 
             if ($locationOK) {
                 $insertion = new LocationInsertion($name, $address, $latitude, $longitude);

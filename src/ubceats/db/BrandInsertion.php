@@ -21,8 +21,9 @@ class BrandInsertion extends DbQuery
      * a <b>mysqli_result</b> object.For other successful queries <b>mysqli_query</b> will
      * return true and false on failure.
      */
-    public function pushBrandToDB() {
-        $result = $this->query("INSERT INTO brand (name, url, `desc`) VALUES ('".$this->name."', '".$this->url."', '".$this->desc."');");
+    public function pushBrandToDB()
+    {
+        $result = $this->query("INSERT INTO brand (name, url, `desc`) VALUES ('" . $this->name . "', '" . $this->url . "', '" . $this->desc . "');");
         return $result;
     }
 
@@ -31,7 +32,6 @@ class BrandInsertion extends DbQuery
     {
         // FUCK THIS SHIT!!!
     }
-
 
 
 }

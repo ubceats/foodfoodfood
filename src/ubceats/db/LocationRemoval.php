@@ -12,7 +12,8 @@ class LocationRemoval extends DbQuery
     private $name;
     private $address;
 
-    public function __construct(string $name, string $address) {
+    public function __construct(string $name, string $address)
+    {
         $this->name = $name;
         $this->address = $address;
     }
@@ -23,13 +24,15 @@ class LocationRemoval extends DbQuery
      * a <b>mysqli_result</b> object. For other successful queries <b>mysqli_query</b> will
      * return true and false on failure.
      */
-    public function removeLocationFromDB() {
-        $result = $this->query("DELETE FROM locations WHERE name = '".$this->name."' AND address = '".$this->address."';");
+    public function removeLocationFromDB()
+    {
+        $result = $this->query("DELETE FROM locations WHERE name = '" . $this->name . "' AND address = '" . $this->address . "';");
         return $result;
     }
 
-    public function runQuery() {
-        // FUCK THIS SHIT!!!
+    public function runQuery()
+    {
+        // TODO
     }
 
 }

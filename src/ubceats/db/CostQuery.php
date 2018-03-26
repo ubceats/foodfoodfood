@@ -1,4 +1,5 @@
 <?php
+
 namespace ubceats\db;
 
 /**
@@ -6,9 +7,11 @@ namespace ubceats\db;
  * @package ubceats\db
  * @checklist Aggregation query
  */
-class CostQuery extends DbQuery{
+class CostQuery extends DbQuery
+{
 
-    public function runQuery(){
+    public function runQuery()
+    {
         $avg = $this->query("SELECT ROUND(AVG(price),2) AS res FROM food_items;");
 
         $avg = $avg->fetch_assoc()['res'];
@@ -18,7 +21,6 @@ class CostQuery extends DbQuery{
 
         $min = $this->query("SELECT MIN(price) AS res FROM food_items;");
         $min = $min->fetch_assoc()['res'];
-
 
 
         $count = $this->query("SELECT COUNT(price) AS res FROM food_items;");

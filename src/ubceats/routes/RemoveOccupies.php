@@ -12,7 +12,8 @@ use ubceats\db\OccupiesRemoval;
 
 class RemoveOccupies extends GenericRoute
 {
-    public function __invoke(Request $request, Response $response, array $args) {
+    public function __invoke(Request $request, Response $response, array $args)
+    {
         // Log the page load.
         $this->container->get('logger')->info("ubceats '/' remove location");
         $error = null;
@@ -35,7 +36,7 @@ class RemoveOccupies extends GenericRoute
             $name = null;
         }
 
-        $getOccupies= new GetAllOccupies();
+        $getOccupies = new GetAllOccupies();
         $occupiesList = $getOccupies->runQuery();
 
         // Render the page.

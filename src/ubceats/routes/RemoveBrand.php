@@ -9,7 +9,8 @@ use ubceats\db\BrandRemoval;
 
 class RemoveBrand extends GenericRoute
 {
-    public function __invoke(Request $request, Response $response, array $args) {
+    public function __invoke(Request $request, Response $response, array $args)
+    {
         // Log the page load.
         $this->container->get('logger')->info("ubceats '/' remove brand");
         $error = null;

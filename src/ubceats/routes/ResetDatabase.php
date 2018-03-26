@@ -11,7 +11,8 @@ use ubceats\db\ResetDatabaseQuery;
 
 class ResetDatabase extends GenericRoute
 {
-    public function __invoke(Request $request, Response $response, array $args) {
+    public function __invoke(Request $request, Response $response, array $args)
+    {
         // Log the page load.
         $this->container->get('logger')->info("ubceats '/' reset database");
         $error = null;
@@ -33,7 +34,7 @@ class ResetDatabase extends GenericRoute
         $getBrands = new ListBrands();
         $brandsList = $getBrands->getBrandsNamesList();
 
-        $path    = $GLOBALS['dir'] . 'private/sql';
+        $path = $GLOBALS['dir'] . 'private/sql';
         $files = array_diff(scandir($path), array('.', '..'));
 
         // Render the page.

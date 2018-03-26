@@ -1,4 +1,5 @@
 <?php
+
 namespace ubceats\db;
 
 /**
@@ -6,9 +7,11 @@ namespace ubceats\db;
  * @package ubceats\db
  * @checklist Nested aggregation query
  */
-class MostLeastPrice extends DbQuery{
+class MostLeastPrice extends DbQuery
+{
 
-    public function runQuery(){
+    public function runQuery()
+    {
         $max = $this->query("SELECT brandName, ROUND(price, 2) AS price FROM
   (SELECT AVG(fi.price) AS price, brandName FROM food_items fi
     GROUP BY brandName
@@ -22,7 +25,6 @@ class MostLeastPrice extends DbQuery{
     ORDER BY price ASC LIMIT 1) AS T;");
 
         $min = $min->fetch_assoc();
-
 
 
         return [

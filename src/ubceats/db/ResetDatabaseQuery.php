@@ -18,5 +18,4 @@ class ResetDatabaseQuery extends DbQuery
     }
 
 
-
 }

@@ -31,7 +31,7 @@ class LocationUpdate extends DbQuery
 
     public function runQuery()
     {
-        // FUCK THIS SHIT!!!
+        // TODO
     }
 
 }

@@ -8,7 +8,8 @@ class FoodItemInsertion extends DbQuery
     private $brand;
     private $price;
 
-    public function __construct(string $name, string $brand, string $price) {
+    public function __construct(string $name, string $brand, string $price)
+    {
         $this->name = $name;
         $this->brand = $brand;
         $this->price = $price;
@@ -20,8 +21,9 @@ class FoodItemInsertion extends DbQuery
      * a <b>mysqli_result</b> object.For other successful queries <b>mysqli_query</b> will
      * return true and false on failure.
      */
-    public function pushFoodItemToDB() {
-        $result = $this->query("INSERT INTO food_items (name, brandName, price) VALUES ('".$this->name."', '".$this->brand."', '".$this->price."');");
+    public function pushFoodItemToDB()
+    {
+        $result = $this->query("INSERT INTO food_items (name, brandName, price) VALUES ('" . $this->name . "', '" . $this->brand . "', '" . $this->price . "');");
         return $result;
     }
 
@@ -30,7 +32,6 @@ class FoodItemInsertion extends DbQuery
     {
         // FUCK THIS SHIT!!!
     }
-
 
 
 }
