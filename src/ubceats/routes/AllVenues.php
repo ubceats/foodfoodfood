@@ -13,6 +13,6 @@ class AllVenues extends GenericRoute
         $this->container->get('logger')->info("ubceats '/' list");
 
         // Render index view
-        return $this->container->get('renderer')->render($response, 'venues.phtml', ["venues" => (new VenueList())()]);
+        return $this->container->get('renderer')->render($response, 'venues.phtml', ["venues" => (new VenueList($request->getQueryParam("showURL") === 'true'))()]);
     }
 }

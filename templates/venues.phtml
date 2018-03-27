@@ -7,10 +7,19 @@
         </ol>
     </nav>
     <h3>Brands available on campus <span class="badge badge-secondary"><?php echo sizeof($venues); ?></span></h3>
+
+    <?php if(!isset($venues[0]["url"])){ ?>
+         <a class="btn btn-success btn-sm" href="/list?showURL=true">Show URL</a>
+    <?php } else{ ?>
+        <a class="btn btn-danger btn-sm" href="/list?showURL=false">Hide URL</a>
+    <?php } ?>
+
+    <br>
+
     <br/>
     <ul class="list-group">
         <?php foreach ($venues as $venue) : ?>
-            <li class="list-group-item"><?php echo '<a href="/brand/' . urlencode($venue) . '">' . $venue . '</a>' ?></li>
+            <li class="list-group-item"><?php echo '<a href="/brand/' . urlencode($venue['name']) . '">' . $venue['name'] . '</a>' ?> <?php if(isset($venue["url"])): ?><a href="<?php echo $venue['url']; ?>" class="btn btn-outline-primary btn-sm float-right"><?php echo parse_url($venue['url'])['host']; ?></a><?php endif; ?></li>
         <?php endforeach; ?>
     </ul>
 </main>
