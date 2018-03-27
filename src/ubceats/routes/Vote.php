@@ -15,6 +15,12 @@ class Vote extends GenericRoute
 
         $this->container->get('logger')->info("ubceats '/' vote");
 
+        switch ($body["intent"]){
+            case 'create':
+
+                break;
+        }
+
         $res = (new VoteQuery($body["brandName"], $body["foodItemName"], $body["isUpvote"], $body["review"]))();
         //var_dump($body);
         //var_dump($res);
