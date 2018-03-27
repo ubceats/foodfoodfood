@@ -25,7 +25,7 @@ class RemoveVote extends DbQuery
     {
         $result = $this->query(
             "DELETE FROM  votes
-WHERE username = '{$this->getDb()->escape_string($this->username)}'
+WHERE username = '{$this->getDb()->escape_string($_SESSION['username'])}'
             AND brandName = '{$this->getDb()->escape_string($this->brandName)}' 
             AND foodItemName = '{$this->getDb()->escape_string($this->foodItemName)}'");
 

@@ -25,9 +25,9 @@ class Vote extends GenericRoute
                 break;
         }
         //var_dump($body);
-        //var_dump($res);
+        //var_dump($GLOBALS['mysqlLogs']);
 
-        header("Location: " . $_SERVER["HTTP_REFERER"] . '?code=' . urlencode(mysqli_error(DbConnection::getInstance()->getMysqli())));
+        header("Location: " . preg_replace('/\?.*/', '', $_SERVER["HTTP_REFERER"]) . '?code=' . urlencode(mysqli_error(DbConnection::getInstance()->getMysqli())));
         exit();
     }
 }
