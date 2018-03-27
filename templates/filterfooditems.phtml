@@ -4,7 +4,7 @@
 
     <h2>Filter by category</h2>
     <p>Select the categories to use as filter: </p>
-    <form method="post" action="/filterfooditems">
+    <form method="post" action="/filter">
         <div class="form-group">
     <select name="categories[]" class="custom-select" multiple="multiple">
         <?php foreach ($categories as $category) { ?>
@@ -12,8 +12,9 @@
         <?php } ?>
     </select>
         </div>
-        <input type="submit" class="btn btn-primary" value="Filter food items"/>
+        <input type="submit" class="btn btn-primary" value="Filter"/>
     </form>
+    <br/>
     <h4>Results</h4>
     <?php foreach ($result ?? [] as $fooditem) { ?>
         <li><?php echo $fooditem["name"]; ?></li>

@@ -12,8 +12,8 @@ $app->post('/vote', \ubceats\routes\Vote::class);
 $app->get('/brand/{name}', \ubceats\routes\Brand::class);
 $app->get('/brand/{brand}/{item}', \ubceats\routes\FoodItem::class);
 
-$app->get('/filterfooditems', \ubceats\routes\FilterFoodItems::class);
-$app->post('/filterfooditems', \ubceats\routes\FilterFoodItems::class);
+$app->get('/filter', \ubceats\routes\FilterFoodItems::class);
+$app->post('/filter', \ubceats\routes\FilterFoodItems::class);
 
 // Login/logout
 $app->get('/login', \ubceats\routes\Login::class);
