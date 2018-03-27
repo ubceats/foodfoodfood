@@ -5,6 +5,7 @@ namespace ubceats\routes;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use ubceats\db\DbConnection;
+use ubceats\db\RemoveVote;
 use ubceats\db\VoteQuery;
 
 class Vote extends GenericRoute
@@ -17,11 +18,12 @@ class Vote extends GenericRoute
 
         switch ($body["intent"]){
             case 'create':
-
+                (new VoteQuery($body["brandName"], $body["foodItemName"], $body["isUpvote"], $body["review"]))();
+                break;
+            case 'delete':
+                (new RemoveVote($body["brandName"], $body["foodItemName"]))();
                 break;
         }
-
-        $res = (new VoteQuery($body["brandName"], $body["foodItemName"], $body["isUpvote"], $body["review"]))();
         //var_dump($body);
         //var_dump($res);
 
