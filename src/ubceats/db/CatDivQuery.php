@@ -1,5 +1,4 @@
 <?php
-
 namespace ubceats\db;
 
 /**
@@ -7,8 +6,7 @@ namespace ubceats\db;
  * @package ubceats\db
  * @checklist Division query
  */
-class CatDivQuery extends DbQuery
-{
+class CatDivQuery extends DbQuery{
 
     private $cats;
     private $brandName;
@@ -17,17 +15,15 @@ class CatDivQuery extends DbQuery
      * CatDivQuery constructor.
      * @param $cats
      */
-    public function __construct(array $cats)
-    {
+    public function __construct(array $cats){
         $this->cats = $cats;
     }
 
 
-    public function runQuery()
-    {
+    public function runQuery(){
         $str = "";
-        foreach ($this->cats as $cat) {
-            $str .= "C.name = '$cat' OR ";
+        foreach ($this->cats as $cat){
+            $str .= "C.name = '{$this->getDb()->escape_string($cat)}' OR ";
         }
 
 
@@ -58,6 +54,7 @@ WHERE NOT EXISTS
         while ($onerow = $brands->fetch_assoc()) {
             array_push($brandsRes, $onerow);
         }
+
 
 
         return [

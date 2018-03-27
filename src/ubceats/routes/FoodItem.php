@@ -24,7 +24,8 @@ class FoodItem extends GenericRoute
             "brand" => urldecode($args['brand']),
             "foodItem" => (new GetItem($args['item'], $args['brand']))(),
             "reviews" => (new GetReviewsForItem($args['item'], $args['brand']))(),
-            "cats" => (new GetCategoriesForItem($args['item'], $args['brand']))()
+            "cats" => (new GetCategoriesForItem($args['item'], $args['brand']))(),
+            "code" => $request->getParam("code")
         ]);
     }
 }

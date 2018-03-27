@@ -10,6 +10,14 @@
         </ol>
     </nav>
 
+    <?php
+    if (!empty($code)) {?>
+        <div class="alert alert-danger" role="alert">
+            <p>Sorry, but you can't add that review. MySQL returned the following error:</p>
+            <code><?php echo $code; ?></code>
+        </div>
+    <?php } ?>
+
     <br/>
 
     <h2>
