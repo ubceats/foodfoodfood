@@ -20,8 +20,8 @@ class AssociateBrandCategory extends GenericRoute
         if ($request->getParam("category")) {
             // the request is an insertion!
             $didInsert = true;
-            $category = $request->getParam("category");
-            $brand = $request->getParam("brand");
+            $category = urldecode($request->getParam("category"));
+            $brand = urldecode($request->getParam("brand"));
             $brandName = $brand;
             $insertion = new BrandCategoryAssociation($brand, $category);
             $categoryName = $category;

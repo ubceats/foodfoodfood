@@ -24,7 +24,7 @@ class FoodItemCategoryAssociation extends DbQuery
     public function pushAssociationToDB()
     {
         $result = $this->query("INSERT INTO itemHas (itemName, categoryName, brandName)
-                      VALUES ('" . $this->fooditem . "', '" . $this->category . "', '" . $this->brand . "');");
+                      VALUES ('" . $this->getDb()->escape_string($this->fooditem) . "', '" . $this->getDb()->escape_string($this->category) . "', '" . $this->getDb()->escape_string($this->brand) . "');");
         return $result;
     }
 

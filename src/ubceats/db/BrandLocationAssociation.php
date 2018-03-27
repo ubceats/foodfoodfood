@@ -24,7 +24,7 @@ class BrandLocationAssociation extends DbQuery
     public function pushAssociationToDB()
     {
         $result = $this->query("INSERT INTO occupies (brandName, locationName, locationAddress)
-                      VALUES ('" . $this->brandName . "', '" . $this->locationName . "', '" . $this->locationAddress . "');");
+                      VALUES ('" . $this->getDb()->escape_string($this->brandName) . "', '" . $this->getDb()->escape_string($this->locationName) . "', '" . $this->getDb()->escape_string($this->locationAddress) . "');");
         return $result;
     }
 
