@@ -63,5 +63,17 @@
 
     </div>
 </main>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        jQuery('option').mousedown(function(e) {
+            e.preventDefault();
+            jQuery(this).toggleClass('selected');
+            jQuery(this).prop('selected', !jQuery(this).prop('selected'));
+            return false;
+        });
+    </script>
 
 <?php include "footer.phtml"; ?>
