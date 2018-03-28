@@ -33,7 +33,8 @@ class GetItemsForBrand extends DbQuery
 
         $q = $this->query("SELECT name, f.brandName, price, ROUND(total) AS total FROM food_items f
 LEFT JOIN
-  (SELECT (((AVG(isUpvote)*100)+100)/2) AS total, v.brandName, foodItemName FROM votes v GROUP BY brandName, foodItemName) AS T ON T.brandName =  f.brandName AND T.foodItemName = f.name
+  (SELECT (((AVG(isUpvote)*100)+100)/2) AS total, v.brandName, foodItemName FROM votes v 
+  GROUP BY brandName, foodItemName) AS T ON T.brandName =  f.brandName AND T.foodItemName = f.name
 WHERE f.brandName = '{$this->getDb()->escape_string($this->name)}' ORDER BY total {$this->getDb()->escape_string($this->order)};");
 
 
