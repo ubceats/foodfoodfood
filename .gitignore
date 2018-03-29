@@ -10,3 +10,4 @@ key.pem
 .idea/foodfoodfood.iml
 .idea/phpRuntime.xml
 import/*
+.DS_Store
