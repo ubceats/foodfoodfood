@@ -18,7 +18,16 @@
         </div>
     <?php } ?>
 
+    <?php
+    if($foodItem["name"] == null){
+        echo "That food item doesn't exist.";
+
+    }
+    ?>
+
     <br/>
+
+    <?php if($foodItem["name"] != null): ?>
 
     <h2>
         <?php echo $foodItem["name"]; ?>
@@ -125,6 +134,7 @@
             </div>
         </div>
     </div>
+    <?php endif; ?>
     <?php endif; ?>
 
 

@@ -16,6 +16,10 @@
         <h1 class="display-4"><i class="ion-pizza"></i> <?php echo $brand['name']; ?></h1>
         <p class="lead text-justify"><?php echo(($brand['desc'] == "") ? "<span class=\"text-muted\">We currently don't have a description for this brand in our database.</span>" : $brand['desc']); ?></p>
 
+        <?php foreach ($cats as $cat): ?>
+            <span class="badge badge-dark"><?php echo $cat["categoryName"]; ?></span>
+        <?php endforeach; ?>
+
 
 
     </div>
