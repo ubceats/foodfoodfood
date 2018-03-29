@@ -31,7 +31,7 @@ class FoodItemCategoryAssociation extends DbQuery
 
     public function runQuery()
     {
-        // FUCK THIS SHIT!!!
+        // Nothing to do
     }
 
 

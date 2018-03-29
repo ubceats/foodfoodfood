@@ -30,7 +30,7 @@ class BrandRemoval extends DbQuery
 
     public function runQuery()
     {
-        // FUCK THIS SHIT!!!
+        // No query needed
     }
 
 }
